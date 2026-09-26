@@ -1,0 +1,942 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    /* 1. Koyu lacivert renk yerine resim ekliyoruz */
+    background-image: url('arka-plan.jpg'); /* Resim dosya adını buraya yazın */
+
+    /* 2. Resmin ekrana tam oturması ve tekrar etmemesi için gerekli ayarlar */
+    background-size: cover;          /* Resmi ekrana sığacak şekilde kaplar */
+    background-position: center;     /* Resmi ekranın ortasına hizalar */
+    background-repeat: no-repeat;    /* Resmin tekrar etmesini engeller */
+    background-attachment: fixed;    /* Kaydırma yapıldığında arka plan sabit kalır (İsteğe bağlı, modern bir hava katar) */
+
+    /* 3. Resmin üzerine hafif bir karartma ekleyerek yazıların okunmasını sağlarız (İsteğe bağlı Ama Önemli!) */
+    /* Bu, resminizin çok açık renkli olması durumunda beyaz yazıların kaybolmasını engeller. */
+    position: relative;
+}
+
+/* Karartma katmanı eklemek için (isteğe bağlı ama önerilir) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Siyah, %60 opaklık (daha karanlık için 0.7-0.8 yapabilirsiniz) */
+    z-index: -1; /* Arka planın önünde, ama içeriğin arkasında kalmasını sağlar */
+}
+
+/* Mevcut body özelliklerinin devamı */
+body {
+    color: #f8fafc;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 16px;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* Başlık Alanı */
+.header {
+    text-align: center;
+}
+
+.logo-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: linear-align(135deg, #2563eb, #1d4ed8);
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 28px;
+    margin-bottom: 16px;
+    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+}
+
+.header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.5;
+}
+
+/* Kartlar */
+.cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    border-color: #3b82f6;
+    background-color: #243248;
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.35);
+}
+
+/* İkon Rozetleri */
+.card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-right: 18px;
+    flex-shrink: 0;
+}
+
+.icon-calculator {
+    background-color: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+}
+
+.icon-archive {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+}
+
+.icon-feedback {
+    background-color: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+}
+
+/* Kart İçeriği */
+.card-content {
+    flex-grow: 1;
+}
+
+.card-content h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin-bottom: 4px;
+}
+
+.card-content p {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+
+.card-arrow {
+    color: #64748b;
+    font-size: 14px;
+    margin-left: 12px;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.card:hover .card-arrow {
+    color: #38bdf8;
+    transform: translateX(4px);
+}
+
+/* Alt Bilgi (Footer) */
+.footer {
+    text-align: center;
+    border-top: 1px solid #1e293b;
+    padding-top: 20px;
+    font-size: 13px;
+    color: #ffffff; /* 1. Genel metin rengi (yıl ve ara nokta) */
+}
+
+.footer strong {
+    color: #ffffff; /* Parlak beyaz */
+}
+
+.disclaimer {
+    color: #cbd5e1; /* Açık gri (okunaklı ve yumuşak) */
+}
+
+.disclaimer {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #475569;
+}
+
+/* ==========================================================
+   HESAPLAYICI GELİŞMİŞ DASHBOARD TASARIMI
+   ========================================================== */
+
+.calc-layout {
+    max-width: 680px;
+    gap: 20px;
+}
+
+/* Üst Gezinme & Başlık */
+.calc-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-link {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #38bdf8;
+}
+
+.system-tag {
+    font-size: 12px;
+    background-color: rgba(59, 130, 246, 0.12);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.header-intro {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.mini-logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #fff;
+    box-shadow: 0 8px 16px -4px rgba(37, 99, 235, 0.35);
+    flex-shrink: 0;
+}
+
+.header-intro h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.header-intro p {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 2px;
+}
+
+/* Bento Kurallar Şeridi */
+.rules-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.rule-chip {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+}
+
+.rule-chip .label {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.rule-chip .val {
+    font-size: 14px;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.text-green { color: #34d399 !important; }
+.text-blue  { color: #60a5fa !important; }
+.text-amber { color: #fbbf24 !important; }
+.text-red   { color: #f87171 !important; }
+.text-accent { color: #38bdf8 !important; }
+
+/* Kart Panelleri */
+.card-section {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.section-title-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #293548;
+}
+
+.section-title-wrap h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #f8fafc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-desc {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 2px;
+}
+
+.text-action-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.text-action-btn:hover {
+    color: #f87171;
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Komite Satırları */
+.komite-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.komite-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #162032;
+    border: 1px solid #293548;
+    padding: 10px 14px;
+    border-radius: 12px;
+    transition: border-color 0.2s;
+}
+
+.komite-row:hover {
+    border-color: #3b82f6;
+}
+
+.row-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.komite-badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: #94a3b8;
+    background-color: #0f172a;
+    padding: 3px 8px;
+    border-radius: 6px;
+}
+
+.komite-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+.akts-pill {
+    font-size: 11px;
+    background-color: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.akts-pill.high-akts {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+}
+
+.row-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.score-input {
+    width: 75px;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    color: #ffffff;
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.score-input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+.input-fixed {
+    width: 75px;
+    background-color: #0f172a;
+    border: 1px solid #1e293b;
+    color: #34d399;
+    font-weight: 600;
+    padding: 7px 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.fixed-tag {
+    font-size: 11px;
+    color: #34d399;
+    font-weight: 500;
+}
+
+/* İkili Grid (MDU & PDÖ) */
+.grid-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.sub-input-card {
+    background-color: #162032;
+    border: 1px solid #293548;
+    padding: 12px 14px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sub-input-card label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 500;
+    color: #cbd5e1;
+}
+
+.sub-pill {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.sub-input-card input {
+    width: 100%;
+    text-align: left;
+}
+
+/* Ana Buton */
+.action-btn-row {
+    margin-top: 4px;
+}
+
+.main-cta-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.4);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.main-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -4px rgba(37, 99, 235, 0.5);
+}
+
+/* DASHBOARD / SONUÇ PANOSU */
+.result-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.status-banner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border-radius: 16px;
+    border: 1px solid;
+}
+
+.status-banner .status-icon {
+    font-size: 24px;
+}
+
+.status-banner h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.status-banner p {
+    font-size: 13px;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.banner-success {
+    background-color: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #34d399;
+}
+
+.banner-info {
+    background-color: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.3);
+    color: #38bdf8;
+}
+
+.banner-danger {
+    background-color: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+
+/* Karo Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.metric-card {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.metric-card.highlight-card {
+    border-color: #0284c7;
+    background-color: #172554;
+}
+
+.metric-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.metric-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #64748b;
+}
+
+.pill-state {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: #0f172a;
+    color: #94a3b8;
+}
+
+.pill-green {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+}
+
+.pill-amber {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+}
+
+.calc-explainer {
+    background-color: #162032;
+    border: 1px solid #293548;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.explainer-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.explainer-item strong {
+    color: #f1f5f9;
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 600px) {
+    .rules-bar {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+    .grid-two {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================
+   KAYNAKLAR & ARŞİV SAYFASI STİLLERİ
+   ========================================================== */
+
+.archive-logo {
+    background: linear-gradient(135deg, #059669, #10b981) !important;
+    box-shadow: 0 8px 16px -4px rgba(16, 185, 129, 0.35) !important;
+}
+
+/* Canlı Arama Kutusu */
+.search-box-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    font-size: 14px;
+}
+
+.search-box-wrap input {
+    width: 100%;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    color: #f8fafc;
+    padding: 14px 16px 14px 44px;
+    border-radius: 14px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.search-box-wrap input:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+/* Hızlı Genel Linkler */
+.quick-links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.quick-link-card {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+}
+
+.quick-link-card:hover {
+    transform: translateY(-2px);
+    border-color: #10b981;
+    background-color: #243248;
+}
+
+.quick-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.cikmis-icon {
+    background-color: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+}
+
+.quick-info h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #f1f5f9;
+}
+
+.quick-info p {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.open-ext {
+    margin-left: auto;
+    font-size: 11px;
+    color: #64748b;
+}
+
+/* Komite Kartları Listesi */
+.resource-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.resource-item {
+    background-color: #162032;
+    border: 1px solid #293548;
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color 0.2s;
+}
+
+.resource-item:hover {
+    border-color: #3b82f6;
+}
+
+.res-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.res-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.res-title-group h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.res-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.res-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.res-link-btn:hover {
+    color: #ffffff;
+    border-color: #10b981;
+    background-color: rgba(16, 185, 129, 0.15);
+}
+
+@media (max-width: 600px) {
+    .quick-links-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================
+   İLETİŞİM SAYFASI STİLLERİ
+   ========================================================== */
+
+.contact-logo {
+    background: linear-gradient(135deg, #d97706, #f59e0b) !important;
+    box-shadow: 0 8px 16px -4px rgba(245, 158, 11, 0.35) !important;
+}
+
+.contact-links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.contact-link-card {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+}
+
+.contact-link-card:hover {
+    transform: translateY(-2px);
+    border-color: #f59e0b;
+    background-color: #243248;
+}
+
+.email-icon {
+    background-color: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+}
+
+.insta-icon {
+    background-color: rgba(236, 72, 153, 0.15);
+    color: #f472b6;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.custom-select {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    color: #f8fafc;
+    padding: 11px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    cursor: pointer;
+}
+
+.custom-select:focus {
+    border-color: #f59e0b;
+}
+
+.custom-select option {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+textarea {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    color: #ffffff;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s;
+    font-family: inherit;
+}
+
+textarea:focus {
+    border-color: #f59e0b;
+}
+
+@media (max-width: 600px) {
+    .contact-links-grid {
+        grid-template-columns: 1fr;
+    }
+}

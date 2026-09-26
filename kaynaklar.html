@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dönem 1 Ders Kaynakları & Arşiv | OMÜ Tıp</title>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container calc-layout">
+        <!-- Başlık & Geri Dönüş -->
+        <header class="calc-header">
+            <div class="nav-bar">
+                <a href="index.html" class="back-link">
+                    <i class="fa-solid fa-chevron-left"></i> Portala Dön
+                </a>
+                <span class="system-tag"><i class="fa-solid fa-folder-open"></i> Güncel Arşiv</span>
+            </div>
+            
+            <div class="header-intro">
+                <div class="mini-logo archive-logo">
+                    <i class="fa-solid fa-box-archive"></i>
+                </div>
+                <div>
+                    <h1>Dönem 1 Kaynak & Arşiv</h1>
+                    <p>Kurul slaytları, çıkmış sorular, anatomi atlasları ve komite notları</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Arama Kutusu -->
+        <div class="search-box-wrap">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="archive-search" placeholder="Kurul adı veya kaynak ara (örn: Enerji, Çıkmış, Anatomi)...">
+        </div>
+
+        <!-- Hızlı Genel Bağlantılar (Ana Arşivler) -->
+        <div class="quick-links-grid">
+            <a href="#" target="_blank" class="quick-link-card">
+                <div class="quick-icon"><i class="fa-brands fa-google-drive"></i></div>
+                <div class="quick-info">
+                    <h4>Ana Google Drive</h4>
+                    <p>Dönem 1 ortak ders arşivi</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square open-ext"></i>
+            </a>
+
+            <a href="#" target="_blank" class="quick-link-card">
+                <div class="quick-icon cikmis-icon"><i class="fa-solid fa-file-circle-question"></i></div>
+                <div class="quick-info">
+                    <h4>Toplu Çıkmışlar</h4>
+                    <p>Tüm yılların komite soruları</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square open-ext"></i>
+            </a>
+        </div>
+
+        <!-- Komitelere Özel Kaynak Kartları -->
+        <div class="card-section">
+            <div class="section-title-wrap">
+                <div>
+                    <h2><i class="fa-solid fa-layer-group"></i> Komite Arşivleri</h2>
+                    <p class="section-desc">Her komitenin not, çıkmış ve sunum linkleri</p>
+                </div>
+            </div>
+
+            <div class="resource-cards-list" id="resource-list">
+
+                <!-- Hayatın Temeli -->
+                <div class="resource-item" data-title="hayatın temeli kurul tıbbi biyoloji genetik biyokimya">
+                    <div class="res-head">
+                        <div class="res-title-group">
+                            <span class="komite-badge">Kurul</span>
+                            <h3>Hayatın Temeli</h3>
+                        </div>
+                        <span class="akts-pill">4 AKTS</span>
+                    </div>
+                    <div class="res-links">
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-brands fa-google-drive"></i> Drive Klasörü</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-file-lines"></i> Çıkmış Sorular</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-book"></i> Özet Notlar</a>
+                    </div>
+                </div>
+
+                <!-- Yaşam -->
+                <div class="resource-item" data-title="yaşam kurul histoloji hücre">
+                    <div class="res-head">
+                        <div class="res-title-group">
+                            <span class="komite-badge">Kurul</span>
+                            <h3>Yaşam</h3>
+                        </div>
+                        <span class="akts-pill">5 AKTS</span>
+                    </div>
+                    <div class="res-links">
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-brands fa-google-drive"></i> Drive Klasörü</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-file-lines"></i> Çıkmış Sorular</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-book"></i> Özet Notlar</a>
+                    </div>
+                </div>
+
+                <!-- Beslenme -->
+                <div class="resource-item" data-title="beslenme kurul biyokimya sindirim">
+                    <div class="res-head">
+                        <div class="res-title-group">
+                            <span class="komite-badge">Kurul</span>
+                            <h3>Beslenme</h3>
+                        </div>
+                        <span class="akts-pill">5 AKTS</span>
+                    </div>
+                    <div class="res-links">
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-brands fa-google-drive"></i> Drive Klasörü</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-file-lines"></i> Çıkmış Sorular</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-book"></i> Özet Notlar</a>
+                    </div>
+                </div>
+
+                <!-- Enerji -->
+                <div class="resource-item" data-title="enerji kurul metabolizma biyofizik">
+                    <div class="res-head">
+                        <div class="res-title-group">
+                            <span class="komite-badge">Kurul</span>
+                            <h3>Enerji</h3>
+                        </div>
+                        <span class="akts-pill">5 AKTS</span>
+                    </div>
+                    <div class="res-links">
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-brands fa-google-drive"></i> Drive Klasörü</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-file-lines"></i> Çıkmış Sorular</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-book"></i> Özet Notlar</a>
+                    </div>
+                </div>
+
+                <!-- Multiçevrede Denge (MÇD) -->
+                <div class="resource-item" data-title="multiçevrede denge mçd kurul fizyoloji">
+                    <div class="res-head">
+                        <div class="res-title-group">
+                            <span class="komite-badge">Kurul</span>
+                            <h3>Multiçevrede Denge (MÇD)</h3>
+                        </div>
+                        <span class="akts-pill">5 AKTS</span>
+                    </div>
+                    <div class="res-links">
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-brands fa-google-drive"></i> Drive Klasörü</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-file-lines"></i> Çıkmış Sorular</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-book"></i> Özet Notlar</a>
+                    </div>
+                </div>
+
+                <!-- Üreme -->
+                <div class="resource-item" data-title="üreme kurul embriyoloji">
+                    <div class="res-head">
+                        <div class="res-title-group">
+                            <span class="komite-badge">Kurul</span>
+                            <h3>Üreme</h3>
+                        </div>
+                        <span class="akts-pill">5 AKTS</span>
+                    </div>
+                    <div class="res-links">
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-brands fa-google-drive"></i> Drive Klasörü</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-file-lines"></i> Çıkmış Sorular</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-book"></i> Özet Notlar</a>
+                    </div>
+                </div>
+
+                <!-- Destek ve Hareket -->
+                <div class="resource-item" data-title="destek ve hareket kurul anatomi kemik kas eklem">
+                    <div class="res-head">
+                        <div class="res-title-group">
+                            <span class="komite-badge">Kurul</span>
+                            <h3>Destek ve Hareket</h3>
+                        </div>
+                        <span class="akts-pill high-akts">9 AKTS</span>
+                    </div>
+                    <div class="res-links">
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-brands fa-google-drive"></i> Drive Klasörü</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-file-lines"></i> Çıkmış Sorular</a>
+                        <a href="#" target="_blank" class="res-link-btn"><i class="fa-solid fa-bone"></i> Anatomi Atlas & Not</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p><strong>OMÜ Tıp Dönem 1 Portalı</strong> • 2026</p>
+            <p class="disclaimer">Drive linkleri dönem temsilciliği ve öğrenci paylaşımlarıyla güncellenmektedir.</p>
+        </footer>
+    </div>
+
+    <!-- Hızlı Arama Scripti -->
+    <script>
+        const searchInput = document.getElementById('archive-search');
+        const items = document.querySelectorAll('.resource-item');
+
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase().trim();
+            items.forEach(item => {
+                const data = item.getAttribute('data-title').toLowerCase();
+                if (data.includes(val)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

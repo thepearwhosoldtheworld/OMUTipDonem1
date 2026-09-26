@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim & Geri Bildirim | OMÜ Tıp Dönem 1</title>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container calc-layout">
+        <!-- Başlık & Navigasyon -->
+        <header class="calc-header">
+            <div class="nav-bar">
+                <a href="index.html" class="back-link">
+                    <i class="fa-solid fa-chevron-left"></i> Portala Dön
+                </a>
+                <span class="system-tag"><i class="fa-solid fa-envelope-open-text"></i> Geri Bildirim</span>
+            </div>
+            
+            <div class="header-intro">
+                <div class="mini-logo contact-logo">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+                <div>
+                    <h1>Geri Bildirim & İletişim</h1>
+                    <p>Hatalı hesaplama bildirimi, kaynak önerisi veya soru paylaşımı</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hızlı Sosyal / Doğrudan İletişim Kartları -->
+        <div class="contact-links-grid">
+            <a href="mailto:ornek-mail@gmail.com" class="contact-link-card">
+                <div class="quick-icon email-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="quick-info">
+                    <h4>E-Posta</h4>
+                    <p>Doğrudan e-posta gönderin</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square open-ext"></i>
+            </a>
+
+            <a href="https://instagram.com/" target="_blank" class="contact-link-card">
+                <div class="quick-icon insta-icon"><i class="fa-brands fa-instagram"></i></div>
+                <div class="quick-info">
+                    <h4>Instagram / DM</h4>
+                    <p>Hızlı iletişim ve soru</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square open-ext"></i>
+            </a>
+        </div>
+
+        <!-- Geri Bildirim Form Paneli -->
+        <div class="card-section">
+            <div class="section-title-wrap">
+                <div>
+                    <h2><i class="fa-solid fa-message"></i> Mesaj Gönder</h2>
+                    <p class="section-desc">Portal ile ilgili hata bildirimleri veya isteklerinizi iletin.</p>
+                </div>
+            </div>
+
+            <!-- Formspree Entegrasyonu: action kısmına kendi form ID'ni yazabilirsin -->
+            <form action="https://formspree.io/f/xrpbybnn" method="POST" class="feedback-form" id="contact-form">
+                
+                <div class="input-group">
+                    <label for="name">Adınız / Rumuz (Opsiyonel)</label>
+                    <input type="text" id="name" name="name" placeholder="Adınız">
+                </div>
+
+                <div class="input-group">
+                    <label for="topic">Konu Başlığı</label>
+                    <select id="topic" name="topic" class="custom-select">
+                        <option value="hesaplama-hatasi">Not Hesaplayıcı Hatası</option>
+                        <option value="kaynak-onerisi">Yeni Ders Notu / Çıkmış Paylaşımı</option>
+                        <option value="yonerge-degisikligi">Yönetmelik / Katsayı Değişikliği</option>
+                        <option value="diger">Diğer / Genel İstek</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="message">Mesajınız / Açıklama</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Hatanın detayını veya paylaşmak istediğiniz Drive linkini buraya yazabilirsiniz..." required></textarea>
+                </div>
+
+                <button type="submit" class="main-cta-btn">
+                    <i class="fa-solid fa-paper-plane"></i> Gönder
+                </button>
+            </form>
+        </div>
+
+        <footer class="footer">
+            <p><strong>OMÜ Tıp Dönem 1 Portalı</strong> • 2026</p>
+            <p class="disclaimer">Portal öğrenci inisiyatifi ile geliştirilmekte ve güncellenmektedir.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
