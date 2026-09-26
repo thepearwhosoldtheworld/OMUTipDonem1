@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'k1', akts: 1, fixed: 100 },
         { id: 'k2', akts: 4 },
         { id: 'k3', akts: 5 },
-        { id: 'k4', akts: 5 },
+        { id: 'k4', akts: 3 },
         { id: 'k5', akts: 5 },
         { id: 'k6', akts: 5 },
         { id: 'k7', akts: 5 },
