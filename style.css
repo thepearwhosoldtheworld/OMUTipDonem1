@@ -603,7 +603,8 @@ h1 {
 
 .disclaimer {
     margin-top: 4px;
-    color: var(--text-tertiary);
+    color: #ffffff !important; 
+    opacity: 0.9; 
 }
 
 /* Renk Yardımcıları */
@@ -627,4 +628,28 @@ h1 {
     .quick-links-grid, .contact-links-grid, .grid-two {
         grid-template-columns: 1fr;
     }
+}
+
+.card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.external-pill {
+    font-size: 10px;
+    background: rgba(41, 151, 255, 0.12);
+    border: 1px solid rgba(41, 151, 255, 0.25);
+    color: var(--apple-blue);
+    padding: 2px 7px;
+    border-radius: 980px;
+    font-weight: 500;
+}
+
+.icon-redirect {
+    color: var(--apple-blue) !important;
+}
+
+.portal-redirect-card:hover {
+    border-color: rgba(41, 151, 255, 0.35) !important;
 }
