@@ -636,20 +636,26 @@ h1 {
     gap: 8px;
 }
 
+.card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .external-pill {
     font-size: 10px;
-    background: rgba(41, 151, 255, 0.12);
-    border: 1px solid rgba(41, 151, 255, 0.25);
-    color: var(--apple-blue);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
     padding: 2px 7px;
     border-radius: 980px;
     font-weight: 500;
 }
 
 .icon-redirect {
-    color: var(--apple-blue) !important;
+    color: var(--text-primary) !important;
 }
 
 .portal-redirect-card:hover {
-    border-color: rgba(41, 151, 255, 0.35) !important;
+    border-color: var(--glass-border-hover) !important;
 }
