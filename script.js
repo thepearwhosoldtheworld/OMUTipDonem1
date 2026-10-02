@@ -95,7 +95,7 @@ function hesapla() {
             • MDÜ Katkısı (%10 - Not: ${mdu}): <strong>${(mdu * 0.10).toFixed(2)}</strong><br>
             • PDÖ Katkısı (%10 - Not: ${pdo}): <strong>${(pdo * 0.10).toFixed(2)}</strong><br>
             • Normalizasyon Çarpanı: <strong>100 / 95</strong><br>
-             <strong>Yıl Sonu Başarı Notunuz:</strong> [${hamToplam.toFixed(2)}] × (100/95) = <strong>${muafiyetNotu.toFixed(2)}</strong>
+            <strong>Yıl Sonu Başarı Notunuz:</strong> [${hamToplam.toFixed(2)}] × (100/95) = <strong>${muafiyetNotu.toFixed(2)}</strong>
         `;
         return;
     }
@@ -149,7 +149,7 @@ function hesapla() {
             • Final Katkısı (%25 - Not: ${girilenFinal}): <strong>${(girilenFinal * 0.25).toFixed(2)}</strong><br>
             • MDÜ Katkısı (%10 - Not: ${mdu}): <strong>${(mdu * 0.10).toFixed(2)}</strong><br>
             • PDÖ Katkısı (%10 - Not: ${pdo}): <strong>${(pdo * 0.10).toFixed(2)}</strong><br>
-             <strong>Yıl Sonu Notunuz:</strong> [${hamYilSonu.toFixed(2)}] × (100/95) = <strong>${gercekYilSonu.toFixed(2)}</strong>
+            <strong>Yıl Sonu Notunuz:</strong> [${hamYilSonu.toFixed(2)}] × (100/95) = <strong>${gercekYilSonu.toFixed(2)}</strong>
         `;
         return;
     }
