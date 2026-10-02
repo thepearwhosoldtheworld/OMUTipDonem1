@@ -535,13 +535,33 @@ h1 {
 }
 
 .calc-explainer {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--glass-border);
     border-radius: 14px;
-    padding: 12px 14px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #ffffff !important; /* Saf Beyaz */
+    line-height: 1.6;
+}
+
+.calc-explainer strong {
+    color: #ffffff !important;
+}
+
+/* Durum bildirim başlığı altındaki açıklama metni */
+.status-banner p {
     font-size: 12px;
-    color: var(--text-secondary);
-    line-height: 1.5;
+    color: #ffffff !important; /* Saf Beyaz */
+    opacity: 0.9;
+}
+
+/* Metrik kartlarının altındaki küçük açıklamalar */
+.metric-footer {
+    font-size: 11px;
+    color: #ffffff !important; /* Saf Beyaz */
+    opacity: 0.8;
+    display: flex;
+    justify-content: space-between;
 }
 
 /* ==========================================================
@@ -627,7 +647,6 @@ h1 {
 /* ==========================================================
    FOOTER (İnce & Minimal)
    ========================================================== */
-
 .footer {
     text-align: center;
     padding-top: 24px;
