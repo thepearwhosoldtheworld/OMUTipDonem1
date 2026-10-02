@@ -1,18 +1,21 @@
+/* ==========================================================
+   OMÜ TIP DÖNEM 1 - GENEL SİSTEM STİLLERİ & APPLE GLASS
+   ========================================================== */
+
 :root {
     --bg-dark: #0a0a0c;
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.65);
+    --text-secondary: rgba(255, 255, 255, 0.70);
     --text-muted: rgba(255, 255, 255, 0.45);
     
     --apple-blue: #2997ff;
     --apple-green: #30d158;
     --apple-amber: #ffd60a;
     --apple-red: #ff453a;
-    
-    --glass-bg: rgba(20, 20, 24, 0.78);
-    --glass-bg-subtle: rgba(255, 255, 255, 0.05);
+
+    --glass-card: rgba(26, 26, 30, 0.65);
+    --glass-card-hover: rgba(40, 40, 46, 0.75);
     --glass-border: rgba(255, 255, 255, 0.12);
-    --glass-border-hover: rgba(255, 255, 255, 0.25);
 }
 
 * {
@@ -29,12 +32,14 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    align-items: center;
     position: relative;
-    overflow-x: hidden;
-    padding: 30px 16px 60px 16px;
+    padding: 30px 16px;
 }
 
-.background-overlay {
+/* Kampüs Arka Planı */
+.background-overlay, body::before {
+    content: '';
     position: fixed;
     top: 0;
     left: 0;
@@ -47,31 +52,120 @@ body {
     z-index: -2;
 }
 
-body::before {
+body::after {
     content: '';
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(10, 10, 12, 0.75);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(10, 10, 12, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     z-index: -1;
 }
 
 .container {
     width: 100%;
-    max-width: 680px;
+    max-width: 580px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
+    z-index: 1;
 }
+
+/* ==========================================================
+   ANA SAYFA (PORTAL) KARTLARI
+   ========================================================== */
+
+.portal-header {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.portal-icon {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.portal-title {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+}
+
+.portal-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.portal-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.portal-card {
+    background: var(--glass-card);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border-radius: 18px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portal-card:hover {
+    background: var(--glass-card-hover);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.card-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.card-icon {
+    font-size: 18px;
+    color: var(--text-secondary);
+}
+
+.card-content h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: #ffffff;
+}
+
+.card-content p {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.card-arrow {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* ==========================================================
+   HESAPLAYICI SAYFASI STİLLERİ
+   ========================================================== */
 
 .page-header {
     text-align: center;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .back-link {
@@ -83,35 +177,29 @@ body::before {
     font-size: 13px;
     font-weight: 500;
     margin-bottom: 12px;
-    transition: opacity 0.2s;
-}
-
-.back-link:hover {
-    opacity: 0.8;
 }
 
 .page-title {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.5px;
-    margin-bottom: 6px;
 }
 
 .page-desc {
     font-size: 13px;
     color: var(--text-secondary);
-    margin-bottom: 16px;
+    margin-top: 4px;
 }
 
 .rules-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
-    margin-top: 10px;
+    margin-top: 14px;
 }
 
 .rule-chip {
-    background: var(--glass-bg);
+    background: var(--glass-card);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -121,14 +209,13 @@ body::before {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: 3px;
 }
 
 .rule-chip .label {
     font-size: 10px;
     color: var(--text-muted);
     font-weight: 500;
-    text-align: center;
 }
 
 .rule-chip .val {
@@ -137,34 +224,32 @@ body::before {
 }
 
 .glass-section {
-    background: var(--glass-bg);
+    background: var(--glass-card);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(30px) saturate(190%);
     -webkit-backdrop-filter: blur(30px) saturate(190%);
     border-radius: 20px;
-    padding: 24px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    padding: 22px;
 }
 
 .section-header {
-    margin-bottom: 16px;
-    padding-bottom: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .section-header h2 {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 600;
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--text-primary);
 }
 
 .section-desc {
     font-size: 12px;
     color: var(--text-secondary);
-    margin-top: 4px;
+    margin-top: 3px;
 }
 
 .input-list {
@@ -177,16 +262,10 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--glass-bg-subtle);
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 10px 14px;
-    transition: all 0.2s ease;
-}
-
-.input-row:hover {
-    border-color: var(--glass-border-hover);
-    background: rgba(255, 255, 255, 0.08);
 }
 
 .course-meta {
@@ -200,13 +279,11 @@ body::before {
 .course-num {
     font-size: 12px;
     color: var(--text-muted);
-    font-weight: 500;
 }
 
 .course-name {
     font-size: 14px;
     font-weight: 500;
-    color: var(--text-primary);
 }
 
 .akts-pill {
@@ -220,10 +297,10 @@ body::before {
 }
 
 .score-input {
-    width: 80px;
-    min-width: 80px;
+    width: 75px;
+    min-width: 75px;
     height: 38px;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 10px;
     color: #ffffff;
@@ -231,18 +308,11 @@ body::before {
     font-weight: 600;
     text-align: center;
     outline: none;
-    transition: all 0.2s ease;
 }
 
 .score-input:focus {
     border-color: var(--apple-blue);
-    background: rgba(0, 0, 0, 0.6);
-    box-shadow: 0 0 0 3px rgba(41, 151, 255, 0.25);
-}
-
-.score-input::placeholder {
-    color: var(--text-muted);
-    font-weight: 400;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .score-input::-webkit-outer-spin-button,
@@ -261,7 +331,7 @@ body::before {
 }
 
 .sub-input-card {
-    background: var(--glass-bg-subtle);
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
     padding: 12px 14px;
@@ -274,10 +344,8 @@ body::before {
 .sub-input-card label {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    flex: 1;
+    gap: 3px;
     font-size: 13px;
-    font-weight: 500;
 }
 
 .action-buttons {
@@ -287,7 +355,7 @@ body::before {
 
 .btn-primary, .btn-secondary {
     flex: 1;
-    height: 46px;
+    height: 44px;
     border-radius: 12px;
     font-size: 14px;
     font-weight: 600;
@@ -297,8 +365,6 @@ body::before {
     justify-content: center;
     gap: 8px;
     border: none;
-    outline: none;
-    transition: all 0.2s ease;
 }
 
 .btn-primary {
@@ -306,23 +372,10 @@ body::before {
     color: #000000;
 }
 
-.btn-primary:hover {
-    background: rgba(255, 255, 255, 0.9);
-    transform: translateY(-1px);
-}
-
-.btn-primary:active {
-    transform: translateY(0);
-}
-
 .btn-secondary {
     background: rgba(255, 255, 255, 0.08);
     color: #ffffff;
     border: 1px solid var(--glass-border);
-}
-
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.14);
 }
 
 .hidden {
@@ -338,32 +391,9 @@ body::before {
     gap: 12px;
 }
 
-.status-banner h3 {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 2px;
-}
-
-.status-banner p {
-    font-size: 12px;
-    opacity: 0.85;
-    line-height: 1.4;
-}
-
-.banner-success {
-    background: rgba(48, 209, 88, 0.12);
-    border: 1px solid rgba(48, 209, 88, 0.3);
-}
-
-.banner-info {
-    background: rgba(41, 151, 255, 0.12);
-    border: 1px solid rgba(41, 151, 255, 0.3);
-}
-
-.banner-danger {
-    background: rgba(255, 69, 58, 0.12);
-    border: 1px solid rgba(255, 69, 58, 0.3);
-}
+.banner-success { background: rgba(48, 209, 88, 0.12); border: 1px solid rgba(48, 209, 88, 0.3); }
+.banner-info { background: rgba(41, 151, 255, 0.12); border: 1px solid rgba(41, 151, 255, 0.3); }
+.banner-danger { background: rgba(255, 69, 58, 0.12); border: 1px solid rgba(255, 69, 58, 0.3); }
 
 .results-grid {
     display: grid;
@@ -378,26 +408,11 @@ body::before {
     border-radius: 14px;
     padding: 14px 10px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
 }
 
-.metric-label {
-    font-size: 11px;
-    color: var(--text-secondary);
-}
-
-.metric-value {
-    font-size: 20px;
-    font-weight: 700;
-    color: #ffffff;
-}
-
-.metric-sub {
-    font-size: 10px;
-    color: var(--text-muted);
-}
+.metric-label { font-size: 11px; color: var(--text-secondary); display: block; }
+.metric-value { font-size: 20px; font-weight: 700; color: #ffffff; margin: 4px 0; display: block; }
+.metric-sub { font-size: 10px; color: var(--text-muted); }
 
 .explainer-card {
     background: rgba(255, 255, 255, 0.03);
@@ -414,55 +429,28 @@ body::before {
 .text-amber { color: var(--apple-amber) !important; }
 .text-red { color: var(--apple-red) !important; }
 
+/* ==========================================================
+   FOOTER (BEYAZ METİNLER)
+   ========================================================== */
+
 .footer {
     text-align: center;
-    padding-top: 18px;
+    padding-top: 16px;
     font-size: 11px;
     color: #ffffff;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    margin-top: 10px;
+    margin-top: 6px;
 }
 
-.footer strong {
-    color: #ffffff;
-    font-weight: 600;
-}
-
-.disclaimer {
-    margin-top: 4px;
+.footer strong, .footer p, .disclaimer {
     color: #ffffff !important;
     opacity: 0.85;
 }
 
+/* Mobil Ekranlar */
 @media (max-width: 580px) {
-    body {
-        padding: 20px 12px 40px 12px;
-    }
-
-    .glass-section {
-        padding: 16px;
-    }
-
-    .rules-bar {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .grid-two {
-        grid-template-columns: 1fr;
-    }
-
-    .results-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .course-name {
-        font-size: 13px;
-    }
-
-    .score-input {
-        width: 70px;
-        min-width: 70px;
-        height: 36px;
-        font-size: 13px;
-    }
+    .rules-bar { grid-template-columns: repeat(2, 1fr); }
+    .grid-two { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr; }
+    .score-input { width: 70px; min-width: 70px; }
 }
