@@ -1,3 +1,4 @@
+// OMÜ Tıp Dönem 1 - Standart Kurul Tanımları (Toplam 42 AKTS)
 const kurullar = [
     { id: 'k_uyum', akts: 1, defaultVal: 100 }, // Uyum Haftası (Sabit 100)
     { id: 'k1', akts: 4 },                      // Hayatın Temeli
@@ -5,7 +6,7 @@ const kurullar = [
     { id: 'k3', akts: 3 },                      // Seçmeli Kurul
     { id: 'k4', akts: 5 },                      // Beslenme
     { id: 'k5', akts: 5 },                      // Enerji
-    { id: 'k6', akts: 5 },                      // Mikroçevrede Denge (MÇD: 5 AKTS)
+    { id: 'k6', akts: 5 },                      // Mikroçevrede Denge (MÇD)
     { id: 'k7', akts: 5 },                      // Üreme
     { id: 'k8', akts: 9 }                       // Destek ve Hareket
 ];
@@ -20,7 +21,6 @@ function hesapla() {
         const inputElem = document.getElementById(k.id);
         let val = inputElem ? parseFloat(inputElem.value) : NaN;
 
-        // Uyum haftası için değer boşsa veya NaN ise 100 varsay
         if (k.defaultVal !== undefined && isNaN(val)) {
             val = k.defaultVal;
         }
@@ -29,7 +29,6 @@ function hesapla() {
             agirlikliToplam += val * k.akts;
             girilenAktsToplami += k.akts;
 
-            // Sadece uyum dışındaki bloklardan en az biri girilmişse hesaplamayı başlat
             if (k.id !== 'k_uyum') {
                 kullaniciNotGirdiMi = true;
             }
@@ -44,15 +43,11 @@ function hesapla() {
     // Blok Ortalaması
     const blokOrtalamasi = agirlikliToplam / girilenAktsToplami;
 
-    // MDÜ ve PDÖ Notları (Boşsa 100 varsayılır)
+    // MDÜ ve PDÖ
     const mduInput = document.getElementById('mdu');
     const pdoInput = document.getElementById('pdo');
     const mdu = (mduInput && mduInput.value !== '') ? parseFloat(mduInput.value) : 100;
     const pdo = (pdoInput && pdoInput.value !== '') ? parseFloat(pdoInput.value) : 100;
-
-    // Final Notu Kutusu
-    const finalInput = document.getElementById('final-input');
-    const girilenFinal = (finalInput && finalInput.value !== '') ? parseFloat(finalInput.value) : null;
 
     // Arayüz Alanları
     const resultBox = document.getElementById('result-area');
@@ -66,12 +61,12 @@ function hesapla() {
     if (blokOrtVal) blokOrtVal.innerText = blokOrtalamasi.toFixed(2);
 
     // ==========================================================
-    // 1. DURUM: BLOK ORTALAMASI >= 80.00 (FİNALSİZ GEÇME / MUAFİYET)
+    // 1. DURUM: BLOK ORTALAMASI >= 80.00 (FİNALSİZ GEÇME)
     // Formül: [(Blok * 0.75) + (MDÜ * 0.10) + (PDÖ * 0.10)] * (100 / 95)
     // ==========================================================
     if (blokOrtalamasi >= 80.00) {
         const hamToplam = (blokOrtalamasi * 0.75) + (mdu * 0.10) + (pdo * 0.10);
-        const yilSonuOrtalamasi = hamToplam * (100 / 95);
+        const muafiyetNotu = hamToplam * (100 / 95);
 
         statusBanner.className = 'status-banner banner-success';
         statusBanner.innerHTML = `
@@ -85,16 +80,15 @@ function hesapla() {
         gerekenFinalVal.innerText = "Gereksiz (Muaf)";
         gerekenFinalVal.className = "metric-value text-green";
 
-        yilSonuVal.innerText = yilSonuOrtalamasi.toFixed(2);
+        yilSonuVal.innerText = muafiyetNotu.toFixed(2);
         yilSonuVal.className = "metric-value text-green";
 
         descExplainer.innerHTML = `
             <strong>Finalsiz Geçme (Muafiyet) Hesabı:</strong><br>
             • Blok Katkısı (%75): <strong>${(blokOrtalamasi * 0.75).toFixed(2)}</strong><br>
-            • MDÜ Katkısı (%10 - Not: ${mdu}): <strong>${(mdu * 0.10).toFixed(2)}</strong><br>
-            • PDÖ Katkısı (%10 - Not: ${pdo}): <strong>${(pdo * 0.10).toFixed(2)}</strong><br>
-            • Normalizasyon Çarpanı: <strong>100 / 95</strong><br>
-            👉 <strong>Yıl Sonu Başarı Notunuz:</strong> [${hamToplam.toFixed(2)}] × (100/95) = <strong>${yilSonuOrtalamasi.toFixed(2)}</strong>
+            • MDÜ Katkısı (%10): <strong>${(mdu * 0.10).toFixed(2)}</strong><br>
+            • PDÖ Katkısı (%10): <strong>${(pdo * 0.10).toFixed(2)}</strong><br>
+            👉 <strong>Yıl Sonu Notunuz:</strong> [${hamToplam.toFixed(2)}] × (100/95) = <strong>${muafiyetNotu.toFixed(2)}</strong>
         `;
         return;
     }
@@ -105,55 +99,7 @@ function hesapla() {
     // ==========================================================
     const tabanBilesenler = (blokOrtalamasi * 0.50) + (mdu * 0.10) + (pdo * 0.10);
 
-    // SENARYO A: Kullanıcı Final Notunu Girdiyse
-    if (girilenFinal !== null) {
-        const hamYilSonu = tabanBilesenler + (girilenFinal * 0.25);
-        const gercekYilSonu = hamYilSonu * (100 / 95);
-
-        const barajGecti = girilenFinal >= 49.50;
-        const ortalamaGecti = gercekYilSonu >= 69.50;
-
-        if (barajGecti && ortalamaGecti) {
-            statusBanner.className = 'status-banner banner-success';
-            statusBanner.innerHTML = `
-                <div class="banner-icon"><i class="fa-solid fa-circle-check text-green"></i></div>
-                <div>
-                    <h3 class="text-green">Tebrikler, Sınıfı Geçtiniz!</h3>
-                    <p>Girilen final notuyla 49.50 final barajını ve 69.50 yıl sonu barajını geçtiniz.</p>
-                </div>
-            `;
-            gerekenFinalVal.innerText = girilenFinal.toFixed(1) + " (Girildi)";
-            gerekenFinalVal.className = "metric-value text-green";
-            yilSonuVal.innerText = gercekYilSonu.toFixed(2);
-            yilSonuVal.className = "metric-value text-green";
-        } else {
-            statusBanner.className = 'status-banner banner-danger';
-            let hataSebebi = !barajGecti ? "Final sınav notunuz 49.50 barajının altında kaldı." : "Yıl sonu ortalamanız 69.50 barajının altında kaldı.";
-            statusBanner.innerHTML = `
-                <div class="banner-icon"><i class="fa-solid fa-triangle-exclamation text-red"></i></div>
-                <div>
-                    <h3 class="text-red">Bütünlemeye Kaldınız</h3>
-                    <p>${hataSebebi}</p>
-                </div>
-            `;
-            gerekenFinalVal.innerText = girilenFinal.toFixed(1) + " (Yetersiz)";
-            gerekenFinalVal.className = "metric-value text-red";
-            yilSonuVal.innerText = gercekYilSonu.toFixed(2);
-            yilSonuVal.className = "metric-value text-red";
-        }
-
-        descExplainer.innerHTML = `
-            <strong>Hesaplanan Yıl Sonu Notu Dökümü:</strong><br>
-            • Blok Katkısı (%50): <strong>${(blokOrtalamasi * 0.50).toFixed(2)}</strong><br>
-            • Final Katkısı (%25 - Not: ${girilenFinal}): <strong>${(girilenFinal * 0.25).toFixed(2)}</strong><br>
-            • MDÜ Katkısı (%10 - Not: ${mdu}): <strong>${(mdu * 0.10).toFixed(2)}</strong><br>
-            • PDÖ Katkısı (%10 - Not: ${pdo}): <strong>${(pdo * 0.10).toFixed(2)}</strong><br>
-            👉 <strong>Yıl Sonu Notunuz:</strong> [${hamYilSonu.toFixed(2)}] × (100/95) = <strong>${gercekYilSonu.toFixed(2)}</strong>
-        `;
-        return;
-    }
-
-    // SENARYO B: Final Notu Boş Bırakıldıysa (Gereken Finali Hesapla)
+    // 69.50 için gereken final notu hesabı
     const gerekenHamToplam = 69.50 * 0.95; // 66.025
     const gerekenFinalHam = (gerekenHamToplam - tabanBilesenler) / 0.25;
     let gerekenFinal = Math.max(49.50, gerekenFinalHam);
@@ -183,17 +129,16 @@ function hesapla() {
         gerekenFinalVal.innerText = gerekenFinal.toFixed(1);
         gerekenFinalVal.className = "metric-value text-blue";
 
-        const tahminiHam = tabanBilesenler + (gerekenFinal * 0.25);
-        const tahminiYilSonu = tahminiHam * (100 / 95);
-        yilSonuVal.innerText = tahminiYilSonu.toFixed(2);
+        const ornekHam = tabanBilesenler + (gerekenFinal * 0.25);
+        const ornekYilSonu = ornekHam * (100 / 95);
+        yilSonuVal.innerText = ornekYilSonu.toFixed(2);
         yilSonuVal.className = "metric-value text-blue";
     }
 
     descExplainer.innerHTML = `
         <strong>Final ile Geçme Hesabı:</strong><br>
         Formül: [(Blok × 0.50) + (Final × 0.25) + (MDÜ × 0.10) + (PDÖ × 0.10)] × (100/95) ≥ 69.50<br>
-        • Final barajı en az <strong>49.50</strong> puandır.<br>
-        • Final notunuz belliyse yukarıdaki kutucuğa yazarak doğrudan yıl sonu ortalamanızı görebilirsiniz.
+        • Final barajı en az <strong>49.50</strong> puandır.
     `;
 }
 
@@ -204,8 +149,6 @@ function sifirla() {
             inp.value = '';
         }
     });
-    const finalInp = document.getElementById('final-input');
-    if (finalInp) finalInp.value = '';
     const resultBox = document.getElementById('result-area');
     if (resultBox) resultBox.classList.add('hidden');
 }
