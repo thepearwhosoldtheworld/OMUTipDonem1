@@ -1,5 +1,5 @@
 /* ==========================================================
-   OMÜ TIP DÖNEM 1 - APPLE MONOCHROME GLASS TASARIM SİSTEMİ
+   OMÜ TIP DÖNEM 1 - APPLE MONOCHROME GLASS DESIGN SYSTEM
    ========================================================== */
 
 :root {
@@ -8,7 +8,7 @@
     --text-secondary: rgba(255, 255, 255, 0.70);
     --text-muted: rgba(255, 255, 255, 0.45);
     
-    /* Monokrom / Gri Palet (Renkliler Kaldırıldı) */
+    /* Apple Monokrom / Gri Vurgular */
     --accent-gray: rgba(255, 255, 255, 0.85);
     --pill-gray-bg: rgba(255, 255, 255, 0.08);
     --pill-gray-border: rgba(255, 255, 255, 0.16);
@@ -40,32 +40,31 @@ body {
     overflow-x: hidden;
 }
 
-/* Kampüs Arka Plan Görseli */
 .background-overlay, body::before {
     content: '';
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('background.jpg');
+    width: 100vw;
+    height: 100vh;
+    background-image: url('arka-plan.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
     z-index: -2;
 }
 
-/* Arkadaki fotoğrafı kapatmayan, tatlı bir koyuluk ve buğu katan katman */
+/* Fotoğrafın net görünmesi için sadece hafif buğu ve %35 koyuluk */
 body::after {
     content: '';
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(10, 10, 12, 0.45); /* Fotoğraf net görünsün diye hafifletildi */
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 10, 14, 0.35);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     z-index: -1;
 }
 
@@ -80,7 +79,7 @@ body::after {
 }
 
 /* ==========================================================
-   ANA SAYFA (INDEX.HTML) STİLLERİ
+   PORTAL ORTAK BAŞLIK VE KARTLAR (INDEX.HTML)
    ========================================================== */
 
 .header {
@@ -146,7 +145,6 @@ body::after {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
-/* İkon kutusu ve ikonlar: Renkli yerine şık gri/gümüş */
 .card-icon {
     width: 42px;
     height: 42px;
@@ -158,10 +156,6 @@ body::after {
     font-size: 18px;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.10);
-    color: var(--accent-gray) !important;
-}
-
-.icon-calculator, .icon-archive, .icon-feedback, .icon-redirect {
     color: var(--accent-gray) !important;
 }
 
@@ -189,7 +183,6 @@ body::after {
     line-height: 1.4;
 }
 
-/* Üst Dönemler Hapı: Mor yerine Apple gri rozet */
 .external-pill {
     font-size: 10px;
     background: var(--pill-gray-bg);
@@ -368,22 +361,11 @@ body::after {
     font-weight: 600;
     text-align: center;
     outline: none;
-    transition: all 0.2s ease;
 }
 
 .score-input:focus {
     border-color: rgba(255, 255, 255, 0.4);
     background: rgba(0, 0, 0, 0.7);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
-}
-
-.score-input::-webkit-outer-spin-button,
-.score-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-.score-input[type=number] {
-    -moz-appearance: textfield;
 }
 
 .grid-two {
@@ -428,7 +410,6 @@ body::after {
     gap: 8px;
     border: none;
     outline: none;
-    transition: all 0.2s ease;
 }
 
 .btn-primary {
@@ -436,18 +417,10 @@ body::after {
     color: #000000;
 }
 
-.btn-primary:hover {
-    background: rgba(255, 255, 255, 0.88);
-}
-
 .btn-secondary {
     background: rgba(255, 255, 255, 0.08);
     color: #ffffff;
     border: 1px solid var(--card-border);
-}
-
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.14);
 }
 
 .hidden {
@@ -496,9 +469,58 @@ body::after {
     line-height: 1.6;
 }
 
-/* Gri / Gümüş / Saf Vurgular */
-.text-green, .text-blue, .text-amber { color: #ffffff !important; }
-.text-red { color: #ff6961 !important; }
+/* ==========================================================
+   İLETİŞİM (İLETİSİM.HTML) SAYFASI STİLLERİ
+   ========================================================= */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+form input[type="text"], 
+form select, 
+form textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+form input[type="text"]:focus, 
+form select:focus, 
+form textarea:focus {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.65);
+}
+
+form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+form select option {
+    background: #1c1c1e;
+    color: #ffffff;
+}
+
+form button[type="submit"] {
+    height: 44px;
+    background: #ffffff;
+    color: #000000;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+}
 
 /* ==========================================================
    FOOTER
