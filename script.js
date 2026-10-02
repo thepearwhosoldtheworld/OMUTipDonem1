@@ -1,4 +1,4 @@
-// OMÜ Tıp Dönem 1 - Kurul Tanımları & AKTS Ağırlıkları
+// OMÜ Tıp Dönem 1 - Kurul ve AKTS Dağılımı
 // Toplam: 1 + 4 + 5 + 3 + 5 + 5 + 5 + 5 + 9 = 42 AKTS
 const kurullar = [
     { id: 'k_uyum', akts: 1, defaultVal: 100 }, // Uyum Haftası (Sabit 100)
@@ -31,7 +31,6 @@ function hesapla() {
             agirlikliToplam += val * k.akts;
             girilenAktsToplami += k.akts;
 
-            // Uyum haftası dışındaki kurullardan en az biri girilmiş olmalı
             if (k.id !== 'k_uyum') {
                 kullaniciNotGirdiMi = true;
             }
@@ -77,14 +76,14 @@ function hesapla() {
 
         statusBanner.className = 'status-banner banner-success';
         statusBanner.innerHTML = `
-            <div class="banner-icon"><i class="fa-solid fa-circle-check text-green"></i></div>
+            <i class="fa-solid fa-circle-check text-green" style="font-size: 24px;"></i>
             <div>
                 <h3 class="text-green">Tebrikler, Finalden Muafsınız!</h3>
-                <p>Blok ortalamanız 80.00 üzerinde olduğu için finale girmeden sınıfı doğrudan geçtiniz.</p>
+                <p>Blok ortalamanız 80.00 üzerinde olduğu için finale girmeden doğrudan geçtiniz.</p>
             </div>
         `;
 
-        gerekenFinalVal.innerText = "Gereksiz (Muaf)";
+        gerekenFinalVal.innerText = "Muaf";
         gerekenFinalVal.className = "metric-value text-green";
 
         yilSonuVal.innerText = muafiyetNotu.toFixed(2);
@@ -96,7 +95,7 @@ function hesapla() {
             • MDÜ Katkısı (%10 - Not: ${mdu}): <strong>${(mdu * 0.10).toFixed(2)}</strong><br>
             • PDÖ Katkısı (%10 - Not: ${pdo}): <strong>${(pdo * 0.10).toFixed(2)}</strong><br>
             • Normalizasyon Çarpanı: <strong>100 / 95</strong><br>
-            👉 <strong>Yıl Sonu Notunuz:</strong> [${hamToplam.toFixed(2)}] × (100/95) = <strong>${muafiyetNotu.toFixed(2)}</strong>
+            👉 <strong>Yıl Sonu Başarı Notunuz:</strong> [${hamToplam.toFixed(2)}] × (100/95) = <strong>${muafiyetNotu.toFixed(2)}</strong>
         `;
         return;
     }
@@ -118,27 +117,27 @@ function hesapla() {
         if (barajGecti && ortalamaGecti) {
             statusBanner.className = 'status-banner banner-success';
             statusBanner.innerHTML = `
-                <div class="banner-icon"><i class="fa-solid fa-circle-check text-green"></i></div>
+                <i class="fa-solid fa-circle-check text-green" style="font-size: 24px;"></i>
                 <div>
                     <h3 class="text-green">Tebrikler, Sınıfı Geçtiniz!</h3>
                     <p>Girilen final notuyla 49.50 final barajını ve 69.50 yıl sonu barajını geçtiniz.</p>
                 </div>
             `;
-            gerekenFinalVal.innerText = girilenFinal.toFixed(1) + " (Girildi)";
+            gerekenFinalVal.innerText = girilenFinal.toFixed(1);
             gerekenFinalVal.className = "metric-value text-green";
             yilSonuVal.innerText = gercekYilSonu.toFixed(2);
             yilSonuVal.className = "metric-value text-green";
         } else {
             statusBanner.className = 'status-banner banner-danger';
-            let hataSebebi = !barajGecti ? "Final sınav notunuz 49.50 barajının altında kaldı." : "Yıl sonu ortalamanız 69.50 barajının altında kaldı.";
+            let hataSebebi = !barajGecti ? "Final notunuz 49.50 barajının altında kaldı." : "Yıl sonu ortalamanız 69.50 barajının altında kaldı.";
             statusBanner.innerHTML = `
-                <div class="banner-icon"><i class="fa-solid fa-triangle-exclamation text-red"></i></div>
+                <i class="fa-solid fa-triangle-exclamation text-red" style="font-size: 24px;"></i>
                 <div>
                     <h3 class="text-red">Bütünlemeye Kaldınız</h3>
                     <p>${hataSebebi}</p>
                 </div>
             `;
-            gerekenFinalVal.innerText = girilenFinal.toFixed(1) + " (Yetersiz)";
+            gerekenFinalVal.innerText = girilenFinal.toFixed(1);
             gerekenFinalVal.className = "metric-value text-red";
             yilSonuVal.innerText = gercekYilSonu.toFixed(2);
             yilSonuVal.className = "metric-value text-red";
@@ -163,20 +162,20 @@ function hesapla() {
     if (gerekenFinal > 100) {
         statusBanner.className = 'status-banner banner-danger';
         statusBanner.innerHTML = `
-            <div class="banner-icon"><i class="fa-solid fa-triangle-exclamation text-red"></i></div>
+            <i class="fa-solid fa-triangle-exclamation text-red" style="font-size: 24px;"></i>
             <div>
                 <h3 class="text-red">Bütünleme İhtimali Yüksek</h3>
                 <p>Mevcut blok ortalaması ile finalde 100 alınsa dahi 69.50 barajına ulaşılamıyor.</p>
             </div>
         `;
-        gerekenFinalVal.innerText = "İmkansız (>100)";
+        gerekenFinalVal.innerText = "> 100";
         gerekenFinalVal.className = "metric-value text-red";
         yilSonuVal.innerText = "--";
         yilSonuVal.className = "metric-value text-red";
     } else {
         statusBanner.className = 'status-banner banner-info';
         statusBanner.innerHTML = `
-            <div class="banner-icon"><i class="fa-solid fa-circle-info text-blue"></i></div>
+            <i class="fa-solid fa-circle-info text-blue" style="font-size: 24px;"></i>
             <div>
                 <h3 class="text-blue">Final Sınavına Girmeniz Gerekiyor</h3>
                 <p>Blok ortalamanız 80.00 altında olduğu için muafiyet kazanamadınız.</p>
@@ -195,7 +194,7 @@ function hesapla() {
         <strong>Final ile Geçme Hesabı:</strong><br>
         Formül: [(Blok × 0.50) + (Final × 0.25) + (MDÜ × 0.10) + (PDÖ × 0.10)] × (100/95) ≥ 69.50<br>
         • Final barajı en az <strong>49.50</strong> puandır.<br>
-        • Final notunuz belliyse yukarıdaki kutucuğa yazarak kesinleşen ortalamanızı görebilirsiniz.
+        • Final notunuz açıklandığında yukarıdaki kutucuğa yazarak kesinleşen ortalamanızı görebilirsiniz.
     `;
 }
 
