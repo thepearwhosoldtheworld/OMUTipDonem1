@@ -1,154 +1,129 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const kurullar = [
-        { id: 'k1', akts: 1, fixed: 100 },
-        { id: 'k2', akts: 4 },
-        { id: 'k3', akts: 5 },
-        { id: 'k4', akts: 3 },
-        { id: 'k5', akts: 5 },
-        { id: 'k6', akts: 5 },
-        { id: 'k7', akts: 5 },
-        { id: 'k8', akts: 5 },
-        { id: 'k9', akts: 9 }
-    ];
 
-    const calcBtn = document.getElementById('calc-btn');
-    const clearBtn = document.getElementById('btn-clear-kurul');
-    const resultDashboard = document.getElementById('result-dashboard');
+const kurullar = [
+    { id: 'k1', akts: 4 },              // Tıbbi Bilimlere Giriş
+    { id: 'k2', akts: 5 },              // Hücre Yapısı
+    { id: 'k3', akts: 6 },              // Hücre Fonksiyonu
+    { id: 'k4', akts: 3 },              // Seçmeli Kurul (3 AKTS)
+    { id: 'k5', akts: 5 },              // Doku Biyolojisi
+    { id: 'k6', akts: 6 },              // Hareket Sistemi
+    { id: 'k7', akts: 5 },              // Dolaşım ve Solunum
+    { id: 'k8', akts: 4 },              // Sindirim ve Metabolizma
+    { id: 'k9', akts: 4 }               // Sinir ve Duyu
+];
 
-    // Kurul Sıfırlama Butonu
-    clearBtn.addEventListener('click', () => {
-        kurullar.forEach(k => {
-            if (!k.fixed) {
-                const el = document.getElementById(k.id);
-                if (el) el.value = '';
-            }
-        });
-        document.getElementById('mdu').value = '';
-        document.getElementById('pdo').value = '';
-        resultDashboard.classList.add('hidden');
-    });
+const TOPLAM_AKTS = kurullar.reduce((acc, curr) => acc + curr.akts, 0); // 42
 
-    // Hesaplama Fonksiyonu
-    calcBtn.addEventListener('click', () => {
-        let toplamPuan = 0;
-        let toplamAkts = 0;
-        let girilenKurulSayisi = 0;
+function hesapla() {
+    let agirlikliToplam = 0;
+    let girilenAktsToplami = 0;
+    let eksikVarMi = false;
 
-        kurullar.forEach(kurul => {
-            if (kurul.fixed !== undefined) {
-                toplamPuan += kurul.fixed * kurul.akts;
-                toplamAkts += kurul.akts;
-                girilenKurulSayisi++;
-            } else {
-                const input = document.getElementById(kurul.id);
-                const val = parseFloat(input.value);
-                if (!isNaN(val) && val >= 0 && val <= 100) {
-                    toplamPuan += val * kurul.akts;
-                    toplamAkts += kurul.akts;
-                    girilenKurulSayisi++;
-                }
-            }
-        });
+    for (let k of kurullar) {
+        const inputElem = document.getElementById(k.id);
+        const val = parseFloat(inputElem.value);
 
-        if (girilenKurulSayisi <= 1) {
-            alert('Lütfen en az bir kurul sınav notunuzu giriniz.');
-            return;
-        }
-
-        const kurulOrtalamasi = toplamPuan / toplamAkts;
-
-        // MDU ve PDÖ Notları (Girilmemişse 0 sayılmaz, girilene göre hesaplanır)
-        const mduVal = parseFloat(document.getElementById('mdu').value);
-        const pdoVal = parseFloat(document.getElementById('pdo').value);
-
-        const mdu = !isNaN(mduVal) ? mduVal : 0;
-        const pdo = !isNaN(pdoVal) ? pdoVal : 0;
-
-        // Arayüz Elementleri
-        const valKurulOrt = document.getElementById('val-kurul-ort');
-        const valMuafiyet = document.getElementById('val-muafiyet');
-        const muafiyetDiff = document.getElementById('muafiyet-diff');
-        const valFinalNeeded = document.getElementById('val-final-needed');
-        const statusBanner = document.getElementById('status-banner');
-        const statusTitle = document.getElementById('status-title');
-        const statusDesc = document.getElementById('status-desc');
-        const statusIcon = document.getElementById('status-icon-i');
-        const explainer = document.getElementById('calc-explainer');
-
-        resultDashboard.classList.remove('hidden');
-        valKurulOrt.textContent = kurulOrtalamasi.toFixed(2);
-
-        // 1. Finalsiz Geçme (Muafiyet) Analizi
-        const muafiyetBaraji = 80.0;
-        if (kurulOrtalamasi >= muafiyetBaraji) {
-            valMuafiyet.textContent = "HAK KAZANDINIZ";
-            valMuafiyet.className = "metric-value text-green";
-            muafiyetDiff.textContent = `+${(kurulOrtalamasi - muafiyetBaraji).toFixed(1)} Puan Üstünde`;
-            muafiyetDiff.className = "pill-state pill-green";
-
-            valFinalNeeded.textContent = "0 (Muaf)";
-            valFinalNeeded.className = "metric-value text-green";
-
-            statusBanner.className = "status-banner banner-success";
-            statusIcon.className = "fa-solid fa-circle-check";
-            statusTitle.textContent = "Finalden Muafsınız!";
-            statusDesc.textContent = `Kurul ortalamanız ${kurulOrtalamasi.toFixed(2)} ile 80 barajını aştığı için finale girmeden doğrudan geçiyorsunuz.`;
-            
-            explainer.innerHTML = `<i class="fa-solid fa-info-circle"></i> Tebrikler! Yönerge gereğince kurul ortalaması 80.0 ve üzeri olan öğrenciler final sınavına girmek zorunda değildir.`;
-            return;
+        if (!isNaN(val) && val >= 0 && val <= 100) {
+            agirlikliToplam += val * k.akts;
+            girilenAktsToplami += k.akts;
         } else {
-            valMuafiyet.textContent = "Muaf Değil";
-            valMuafiyet.className = "metric-value text-amber";
-            const fark = (muafiyetBaraji - kurulOrtalamasi).toFixed(1);
-            muafiyetDiff.textContent = `Muafiyete ${fark} puan var`;
-            muafiyetDiff.className = "pill-state pill-amber";
+            eksikVarMi = true;
         }
+    }
 
-        // 2. Gereken Final Puanı Formülü
-        // 69.5 = ((Kurul * 0.50) + (Final * 0.25) + (MDU * 0.10) + (PDÖ * 0.10)) * (100 / 95)
-        const hedefToplam = 69.5 * (95 / 100); // 66.025
-        const mevcutKatkı = (kurulOrtalamasi * 0.50) + (mdu * 0.10) + (pdo * 0.10);
-        let gerekenFinal = (hedefToplam - mevcutKatkı) / 0.25;
+    if (girilenAktsToplami === 0) {
+        alert("Lütfen en az bir kurul notu giriniz.");
+        return;
+    }
 
-        const finalBaraji = 49.5;
-        let barajUyarisi = false;
+    const blokOrtalamasi = agirlikliToplam / girilenAktsToplami;
 
-        if (gerekenFinal < finalBaraji) {
-            gerekenFinal = finalBaraji;
-            barajUyarisi = true;
-        }
+    const mduInput = document.getElementById('mdu');
+    const pdoInput = document.getElementById('pdo');
+    const mdu = mduInput ? (parseFloat(mduInput.value) || 100) : 100;
+    const pdo = pdoInput ? (parseFloat(pdoInput.value) || 100) : 100;
 
-        if (gerekenFinal > 100) {
-            valFinalNeeded.textContent = "İmkânsız (>100)";
-            valFinalNeeded.className = "metric-value text-red";
+    const resultBox = document.getElementById('result-area');
+    const statusBanner = document.getElementById('status-banner');
+    const blokOrtVal = document.getElementById('res-blok-ort');
+    const gerekenFinalVal = document.getElementById('res-gereken-final');
+    const yilSonuVal = document.getElementById('res-yil-sonu');
+    const descExplainer = document.getElementById('res-explainer');
 
-            statusBanner.className = "status-banner banner-danger";
-            statusIcon.className = "fa-solid fa-triangle-exclamation";
-            statusTitle.textContent = "Final ile Geçilemiyor (Büte Kaldınız)";
-            statusDesc.textContent = "Mevcut notlar ile finalden 100 alsanız bile 69.5 geçme sınırına ulaşılamıyor.";
+    if (resultBox) resultBox.classList.remove('hidden');
+    
+    if (blokOrtVal) blokOrtVal.innerText = blokOrtalamasi.toFixed(2);
 
-            explainer.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Sene sonu ortalamanızın 69.5 olabilmesi için finalden 100'ün üzerinde not almanız gerekirdi. Bu şartlarda bütünleme sınavı veya kurul notlarını telafi etmeniz gerekecektir.`;
-        } else {
-            valFinalNeeded.textContent = gerekenFinal.toFixed(1);
-            valFinalNeeded.className = "metric-value text-accent";
+    if (blokOrtalamasi >= 80.00) {
+        const hamYilSonu = (blokOrtalamasi * 0.75) + (mdu * 0.10) + (pdo * 0.10);
+        const muafiyetNotu = hamYilSonu * (100 / 95);
 
-            statusBanner.className = "status-banner banner-info";
-            statusIcon.className = "fa-solid fa-graduation-cap";
-            statusTitle.textContent = `Final Hedefi: ${gerekenFinal.toFixed(1)}`;
-            statusDesc.textContent = barajUyarisi 
-                ? "Yıl sonu ortalamanız kurtarsa dahi final taban barajı (49.5) geçerlidir."
-                : `69.5 geçme notunu yakalamak için finalden en az ${gerekenFinal.toFixed(1)} almalısınız.`;
-
-            explainer.innerHTML = `
-                <div class="explainer-item">
-                    <span>Mevcut Kurul Katkısı (%50): <strong>+${(kurulOrtalamasi * 0.50).toFixed(2)}</strong></span>
-                    <span>MDU (%10) + PDÖ (%10) Katkısı: <strong>+${((mdu * 0.10) + (pdo * 0.10)).toFixed(2)}</strong></span>
-                    <span>100/95 Katsayı Düzeltmesi: <strong>Dahil edildi</strong></span>
+        if (muafiyetNotu >= 69.50) {
+            statusBanner.className = 'status-banner banner-success';
+            statusBanner.innerHTML = `
+                <div class="banner-icon"><i class="fa-solid fa-circle-check text-green"></i></div>
+                <div>
+                    <h3 class="text-green">Tebrikler, Finalden Muafsınız!</h3>
+                    <p>Blok ortalamanız 80.00 üzerinde olduğu için finale girmeden sınıfı doğrudan geçtiniz.</p>
                 </div>
             `;
-        }
+            gerekenFinalVal.innerText = "Gereksiz (Muaf)";
+            gerekenFinalVal.className = "metric-value text-green";
+            yilSonuVal.innerText = muafiyetNotu.toFixed(2);
 
-        // Sonuç paneline yumuşak kaydır
-        resultDashboard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            descExplainer.innerHTML = `
+                <strong>Yeni Yönetmelik Muafiyet Hesabı:</strong><br>
+                [(Blok Ort. × 0.75) + (MDÜ × 0.10) + (PDÖ × 0.10)] × (100/95)<br>
+                [(${blokOrtalamasi.toFixed(2)} × 0.75) + (${mdu} × 0.10) + (${pdo} × 0.10)] × 1.0526 = <strong>${muafiyetNotu.toFixed(2)}</strong> (Geçme şartı: 69.50)
+            `;
+            return;
+        }
+    }
+
+    const mevcutKatki = (blokOrtalamasi * 0.55) + (mdu * 0.10) + (pdo * 0.10);
+    const gecmekIcinGereken = (69.50 - mevcutKatki) / 0.25;
+
+    let hedefFinal = Math.max(49.50, gecmekIcinGereken);
+
+    if (hedefFinal > 100) {
+        statusBanner.className = 'status-banner banner-danger';
+        statusBanner.innerHTML = `
+            <div class="banner-icon"><i class="fa-solid fa-triangle-exclamation text-red"></i></div>
+            <div>
+                <h3 class="text-red">Bütünleme İhtimali Yüksek</h3>
+                <p>Mevcut blok ortalaması ile finalde 100 alınsa dahi 69.50 geçme barajına ulaşılamıyor.</p>
+            </div>
+        `;
+        gerekenFinalVal.innerText = "İmkansız (>100)";
+        gerekenFinalVal.className = "metric-value text-red";
+        yilSonuVal.innerText = "--";
+    } else {
+        statusBanner.className = 'status-banner banner-info';
+        statusBanner.innerHTML = `
+            <div class="banner-icon"><i class="fa-solid fa-circle-info text-blue"></i></div>
+            <div>
+                <h3 class="text-blue">Final Sınavına Girmeniz Gerekiyor</h3>
+                <p>Blok ortalamanız 80.00 altında kaldığı için muafiyet kazanamadınız.</p>
+            </div>
+        `;
+        gerekenFinalVal.innerText = hedefFinal.toFixed(1);
+        gerekenFinalVal.className = "metric-value text-blue";
+        
+        const ornekYilSonu = mevcutKatki + (hedefFinal * 0.25);
+        yilSonuVal.innerText = ornekYilSonu.toFixed(2);
+    }
+
+    descExplainer.innerHTML = `
+        <strong>Standart Yıl Sonu Formülü:</strong><br>
+        (Blok Ort. × 0.55) + (Final × 0.25) + (MDÜ × 0.10) + (PDÖ × 0.10) ≥ 69.50<br>
+        <em>*Final sınav barajı en az 49.50 puandır. Blok ortalaması 80.00 ve üzerine ulaştığında sistem otomatik muafiyete geçer.</em>
+    `;
+}
+
+function sifirla() {
+    kurullar.forEach(k => {
+        const inp = document.getElementById(k.id);
+        if (inp) inp.value = '';
     });
-});
+    const resultBox = document.getElementById('result-area');
+    if (resultBox) resultBox.classList.add('hidden');
+}
