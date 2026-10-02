@@ -4,34 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piriformis | Not Hesaplayıcı</title>
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.ico">
+    
+    <!-- Fontlar & İkonlar -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stil Dosyası -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="background-overlay"></div>
 
     <div class="container">
-        <!-- Üst Başlık & Geri Dön -->
+        <!-- Sayfa Başlığı ve Geri Dönüş -->
         <header class="page-header">
             <a href="index.html" class="back-link">
                 <i class="fa-solid fa-chevron-left"></i> Portala Dön
             </a>
             <h1 class="page-title">Dönem 1 Not Hesaplayıcı</h1>
-            <p class="page-desc">2026-2027 OMÜ Tıp Fakültesi Güncel Yönergesine Göre Hazırlanmıştır</p>
+            <p class="page-desc">2026-2027 OMÜ Tıp Fakültesi Güncel Yönergesine Göre Düzenlenmiştir</p>
 
             <!-- Kural Bilgi Rozetleri -->
             <div class="rules-bar">
                 <div class="rule-chip">
                     <span class="label">Muafiyet Şartı</span>
-                    <span class="val text-green">Blok ≥ 80.00</span>
+                    <span class="val">Blok ≥ 80.00</span>
                 </div>
                 <div class="rule-chip">
                     <span class="label">Muafiyet Ağırlığı</span>
-                    <span class="val text-blue">%75 + %20</span>
+                    <span class="val">%75 + %20</span>
                 </div>
                 <div class="rule-chip">
                     <span class="label">Geçme Barajı</span>
@@ -39,12 +45,12 @@
                 </div>
                 <div class="rule-chip">
                     <span class="label">Final Barajı</span>
-                    <span class="val text-amber">49.50</span>
+                    <span class="val">49.50</span>
                 </div>
             </div>
         </header>
 
-        <!-- Blok Sınav Notları -->
+        <!-- 1. Kısım: Kurul (Komite) Sınav Notları -->
         <section class="glass-section">
             <div class="section-header">
                 <h2><i class="fa-solid fa-graduation-cap"></i> Blok (Kurul) Sınav Notları</h2>
@@ -52,17 +58,17 @@
             </div>
 
             <div class="input-list">
-                <!-- Uyum Haftası -->
+                <!-- Uyum Haftası (1 AKTS - Sabit 100) -->
                 <div class="input-row">
                     <div class="course-meta">
                         <span class="course-num">Giriş:</span>
                         <span class="course-name">Uyum Haftası</span>
                         <span class="akts-pill">1 AKTS</span>
                     </div>
-                    <input type="number" id="k_uyum" class="score-input" value="100" readonly style="opacity: 0.7; cursor: not-allowed;" title="Standart 100 olarak kabul edilir">
+                    <input type="number" id="k_uyum" class="score-input" value="100" readonly title="Herkese standart 100 verilir">
                 </div>
 
-                <!-- 1. Blok: Hayatın Temeli -->
+                <!-- 1. Blok: Hayatın Temeli (4 AKTS) -->
                 <div class="input-row">
                     <div class="course-meta">
                         <span class="course-num">1. Blok:</span>
@@ -72,7 +78,7 @@
                     <input type="number" id="k1" class="score-input" min="0" max="100" placeholder="0-100">
                 </div>
 
-                <!-- 2. Blok: Yaşam -->
+                <!-- 2. Blok: Yaşam (5 AKTS) -->
                 <div class="input-row">
                     <div class="course-meta">
                         <span class="course-num">2. Blok:</span>
@@ -82,7 +88,7 @@
                     <input type="number" id="k2" class="score-input" min="0" max="100" placeholder="0-100">
                 </div>
 
-                <!-- 3. Blok: Seçmeli Kurul -->
+                <!-- 3. Blok: Seçmeli Kurul (3 AKTS) -->
                 <div class="input-row">
                     <div class="course-meta">
                         <span class="course-num">3. Blok:</span>
@@ -92,7 +98,7 @@
                     <input type="number" id="k3" class="score-input" min="0" max="100" placeholder="0-100">
                 </div>
 
-                <!-- 4. Blok: Beslenme -->
+                <!-- 4. Blok: Beslenme (5 AKTS) -->
                 <div class="input-row">
                     <div class="course-meta">
                         <span class="course-num">4. Blok:</span>
@@ -102,7 +108,7 @@
                     <input type="number" id="k4" class="score-input" min="0" max="100" placeholder="0-100">
                 </div>
 
-                <!-- 5. Blok: Enerji -->
+                <!-- 5. Blok: Enerji (5 AKTS) -->
                 <div class="input-row">
                     <div class="course-meta">
                         <span class="course-num">5. Blok:</span>
@@ -112,7 +118,7 @@
                     <input type="number" id="k5" class="score-input" min="0" max="100" placeholder="0-100">
                 </div>
 
-                <!-- 6. Blok: Mikroçevrede Denge (MÇD) -->
+                <!-- 6. Blok: Mikroçevrede Denge (5 AKTS) -->
                 <div class="input-row">
                     <div class="course-meta">
                         <span class="course-num">6. Blok:</span>
@@ -122,7 +128,7 @@
                     <input type="number" id="k6" class="score-input" min="0" max="100" placeholder="0-100">
                 </div>
 
-                <!-- 7. Blok: Üreme -->
+                <!-- 7. Blok: Üreme (5 AKTS) -->
                 <div class="input-row">
                     <div class="course-meta">
                         <span class="course-num">7. Blok:</span>
@@ -132,7 +138,7 @@
                     <input type="number" id="k7" class="score-input" min="0" max="100" placeholder="0-100">
                 </div>
 
-                <!-- 8. Blok: Destek ve Hareket -->
+                <!-- 8. Blok: Destek ve Hareket (9 AKTS) -->
                 <div class="input-row">
                     <div class="course-meta">
                         <span class="course-num">8. Blok:</span>
@@ -144,13 +150,14 @@
             </div>
         </section>
 
-        <!-- Klinik & Uygulama Değerlendirmeleri -->
+        <!-- 2. Kısım: Klinik & Uygulama ve Final Notu -->
         <section class="glass-section">
             <div class="section-header">
-                <h2><i class="fa-solid fa-user-doctor"></i> Klinik & Uygulama Değerlendirmeleri</h2>
+                <h2><i class="fa-solid fa-stethoscope"></i> Klinik & Uygulama Değerlendirmeleri</h2>
                 <p class="section-desc">Yıl sonu ortalamasına %10'ar etki eder.</p>
             </div>
 
+            <!-- MDÜ & PDÖ -->
             <div class="grid-two">
                 <div class="sub-input-card">
                     <label for="mdu">
@@ -169,17 +176,27 @@
                 </div>
             </div>
 
+            <!-- Final Sınav Notu (Opsiyonel) -->
+            <div class="sub-input-card full-width" style="margin-top: 12px;">
+                <label for="final-input">
+                    <span>Final Sınav Notu <small class="text-sub">(Belli değilse boş bırakınız)</small></span>
+                    <span class="akts-pill">%25</span>
+                </label>
+                <input type="number" id="final-input" class="score-input" min="0" max="100" placeholder="Örn: 65">
+            </div>
+
+            <!-- Hesapla / Temizle Butonları -->
             <div class="action-buttons" style="margin-top: 18px;">
-                <button type="button" class="btn-primary" onclick="hesapla()">
+                <button type="button" id="btn-hesapla" class="btn-primary" onclick="hesapla()">
                     <i class="fa-solid fa-bolt"></i> Durumu Hesapla
                 </button>
-                <button type="button" class="btn-secondary" onclick="sifirla()">
+                <button type="button" id="btn-sifirla" class="btn-secondary" onclick="sifirla()">
                     <i class="fa-solid fa-rotate-right"></i> Temizle
                 </button>
             </div>
         </section>
 
-        <!-- Sonuç Alanı -->
+        <!-- 3. Kısım: Hesaplama Sonuç Paneli -->
         <section id="result-area" class="glass-section result-section hidden">
             <div id="status-banner" class="status-banner"></div>
 
@@ -191,13 +208,13 @@
                 </div>
 
                 <div class="metric-card">
-                    <span class="metric-label">Gereken Final</span>
+                    <span class="metric-label">Final Durumu</span>
                     <span id="res-gereken-final" class="metric-value">--</span>
-                    <span class="metric-sub">Geçmek İçin Gereken</span>
+                    <span class="metric-sub">Gereken / Girilen</span>
                 </div>
 
                 <div class="metric-card">
-                    <span class="metric-label">Yıl Sonu Notu</span>
+                    <span class="metric-label">Yıl Sonu Başarı Notu</span>
                     <span id="res-yil-sonu" class="metric-value">--</span>
                     <span class="metric-sub">Geçme Barajı: 69.50</span>
                 </div>
@@ -206,7 +223,7 @@
             <div id="res-explainer" class="explainer-card"></div>
         </section>
 
-        <!-- Alt Bilgi -->
+        <!-- Alt Bilgi (Footer) -->
         <footer class="footer">
             <p><strong>OMÜ Tıp Dönem 1 Portalı</strong> • 2026</p>
             <p class="disclaimer">Yönergeye göre: Blok %50, Final %25, MDÜ %10, PDÖ %10 ağırlık toplanıp (100/95) ile ölçeklenir.</p>
@@ -214,6 +231,7 @@
         </footer>
     </div>
 
+    <!-- Script Dosyası -->
     <script src="script.js"></script>
 </body>
 </html>
