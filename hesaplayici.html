@@ -4,280 +4,240 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piriformis | Not Hesaplayıcı</title>
-    <!-- Modern Google Font: Inter -->
-    <link rel="icon" type="image/png" href="favicon.ico">
+    
+    <!-- Favicon (Sekme Logosu) -->
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <!-- Google Font: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome İkonları -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Stil Dosyası -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="background-overlay"></div>
 
-    <div class="container calc-layout">
-        <!-- Üst Gezinme & Başlık -->
-        <header class="calc-header">
-            <div class="nav-bar">
-                <a href="index.html" class="back-link">
-                    <i class="fa-solid fa-chevron-left"></i> Portala Dön
-                </a>
-                <span class="system-tag"><i class="fa-solid fa-scale-balanced"></i> 2026-2027 Yönergesi</span>
-            </div>
-            
-            <div class="header-intro">
-                <div class="mini-logo">
-                    <i class="fa-solid fa-calculator"></i>
+    <div class="container">
+        <!-- Üst Başlık & Geri Dön Butonu -->
+        <header class="page-header">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-chevron-left"></i> Ana Sayfa
+            </a>
+            <h1 class="page-title">Dönem 1 Not Hesaplayıcı</h1>
+            <p class="page-desc">2026-2027 OMÜ Tıp Fakültesi Güncel Yönergesine Göre Hazırlanmıştır</p>
+
+            <!-- Kural Bilgi Rozetleri -->
+            <div class="rules-bar">
+                <div class="rule-chip">
+                    <span class="label">Muafiyet Şartı</span>
+                    <span class="val text-green">Blok ≥ 80.00</span>
                 </div>
-                <div>
-                    <h1>Dönem 1 Not Simülatörü</h1>
-                    <p>Bloklar (%50), Final (%25), MDU (%10) ve PDÖ (%10)</p>
+                <div class="rule-chip">
+                    <span class="label">Muafiyet Ağırlığı</span>
+                    <span class="val text-blue">%75 + %20</span>
+                </div>
+                <div class="rule-chip">
+                    <span class="label">Geçme Barajı</span>
+                    <span class="val">69.50</span>
+                </div>
+                <div class="rule-chip">
+                    <span class="label">Final Barajı</span>
+                    <span class="val text-amber">49.50</span>
                 </div>
             </div>
         </header>
 
-        <!-- Kural Özet Şeridi (Bento Bar) -->
-<div class="rules-bar">
-    <div class="rule-chip">
-        <span class="label">Muafiyet Şartı</span>
-        <span class="val text-green">Blok ≥ 80.00</span>
-    </div>
-    <div class="rule-chip">
-        <span class="label">Muafiyet Ağırlığı</span>
-        <span class="val text-blue">%75 + %20</span>
-    </div>
-    <div class="rule-chip">
-        <span class="label">Geçme Barajı</span>
-        <span class="val">69.50</span>
-    </div>
-    <div class="rule-chip">
-        <span class="label">Final Barajı</span>
-        <span class="val text-amber">49.50</span>
-    </div>
-</div>
+        <!-- 1. Bölüm: Blok (Komite) Notları -->
+        <section class="glass-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-graduation-cap"></i> Blok (Kurul) Sınav Notları</h2>
+                <p class="section-desc">Toplam 42 AKTS üzerinden ağırlıklı hesaplanır.</p>
+            </div>
 
-        <!-- Ana Panel (Girişler) -->
-        <div class="card-section">
-            <div class="section-title-wrap">
-                <div>
-                    <h2><i class="fa-solid fa-layer-group"></i> Blok Sınavları</h2>
-                    <p class="section-desc">Toplam 42 AKTS üzerinden ağırlıklı hesaplanır.</p>
+            <div class="input-list">
+                <!-- 1. Blok: Hayatın Temeli (4 AKTS) -->
+                <div class="input-row">
+                    <div class="course-meta">
+                        <span class="course-num">1. Blok:</span>
+                        <span class="course-name">Hayatın Temeli</span>
+                        <span class="akts-pill">4 AKTS</span>
+                    </div>
+                    <input type="number" id="k1" class="score-input" min="0" max="100" placeholder="0-100">
                 </div>
-                <button type="button" id="btn-clear-kurul" class="text-action-btn">
-                    <i class="fa-solid fa-rotate-left"></i> Sıfırla
+
+                <!-- 2. Blok: Yaşam (5 AKTS) -->
+                <div class="input-row">
+                    <div class="course-meta">
+                        <span class="course-num">2. Blok:</span>
+                        <span class="course-name">Yaşam</span>
+                        <span class="akts-pill">5 AKTS</span>
+                    </div>
+                    <input type="number" id="k2" class="score-input" min="0" max="100" placeholder="0-100">
+                </div>
+
+                <!-- 3. Blok: Seçmeli Kurul (3 AKTS) -->
+                <div class="input-row">
+                    <div class="course-meta">
+                        <span class="course-num">3. Blok:</span>
+                        <span class="course-name">Seçmeli Kurul</span>
+                        <span class="akts-pill">3 AKTS</span>
+                    </div>
+                    <input type="number" id="k4" class="score-input" min="0" max="100" placeholder="0-100">
+                </div>
+
+                <!-- 4. Blok: Beslenme (6 AKTS) -->
+                <div class="input-row">
+                    <div class="course-meta">
+                        <span class="course-num">4. Blok:</span>
+                        <span class="course-name">Beslenme</span>
+                        <span class="akts-pill">6 AKTS</span>
+                    </div>
+                    <input type="number" id="k3" class="score-input" min="0" max="100" placeholder="0-100">
+                </div>
+
+                <!-- 5. Blok: Enerji (5 AKTS) -->
+                <div class="input-row">
+                    <div class="course-meta">
+                        <span class="course-num">5. Blok:</span>
+                        <span class="course-name">Enerji</span>
+                        <span class="akts-pill">5 AKTS</span>
+                    </div>
+                    <input type="number" id="k5" class="score-input" min="0" max="100" placeholder="0-100">
+                </div>
+
+                <!-- 6. Blok: Mikroçevrede Denge (6 AKTS) -->
+                <div class="input-row">
+                    <div class="course-meta">
+                        <span class="course-num">6. Blok:</span>
+                        <span class="course-name">Mikroçevrede Denge</span>
+                        <span class="akts-pill">6 AKTS</span>
+                    </div>
+                    <input type="number" id="k6" class="score-input" min="0" max="100" placeholder="0-100">
+                </div>
+
+                <!-- 7. Blok: Üreme (5 AKTS) -->
+                <div class="input-row">
+                    <div class="course-meta">
+                        <span class="course-num">7. Blok:</span>
+                        <span class="course-name">Üreme</span>
+                        <span class="akts-pill">5 AKTS</span>
+                    </div>
+                    <input type="number" id="k7" class="score-input" min="0" max="100" placeholder="0-100">
+                </div>
+
+                <!-- 8. Blok: Destek ve Hareket (4 AKTS) -->
+                <div class="input-row">
+                    <div class="course-meta">
+                        <span class="course-num">8. Blok:</span>
+                        <span class="course-name">Destek ve Hareket</span>
+                        <span class="akts-pill">4 AKTS</span>
+                    </div>
+                    <input type="number" id="k8" class="score-input" min="0" max="100" placeholder="0-100">
+                </div>
+
+                <!-- 9. Blok: Sinir ve Duyu (4 AKTS) -->
+                <div class="input-row">
+                    <div class="course-meta">
+                        <span class="course-num">9. Blok:</span>
+                        <span class="course-name">Sinir ve Duyu</span>
+                        <span class="akts-pill">4 AKTS</span>
+                    </div>
+                    <input type="number" id="k9" class="score-input" min="0" max="100" placeholder="0-100">
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Bölüm: Klinik & Uygulama Değerlendirmeleri ve Final Notu -->
+        <section class="glass-section" style="margin-top: 20px;">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-stethoscope"></i> Klinik & Uygulama Değerlendirmeleri</h2>
+                <p class="section-desc">Yıl sonu ortalamasına %10'ar etki eder.</p>
+            </div>
+
+            <!-- MDÜ & PDÖ Alanı -->
+            <div class="grid-two">
+                <div class="sub-input-card">
+                    <label for="mdu">
+                        <span>Mesleki Beceri (MDÜ)</span>
+                        <span class="akts-pill">%10</span>
+                    </label>
+                    <input type="number" id="mdu" class="score-input" value="100" min="0" max="100" placeholder="100">
+                </div>
+
+                <div class="sub-input-card">
+                    <label for="pdo">
+                        <span>Probleme Dayalı Öğr. (PDÖ)</span>
+                        <span class="akts-pill">%10</span>
+                    </label>
+                    <input type="number" id="pdo" class="score-input" value="100" min="0" max="100" placeholder="100">
+                </div>
+            </div>
+
+            <!-- Final Notu Kutusu (Opsiyonel) -->
+            <div class="sub-input-card" style="margin-top: 14px;">
+                <label for="final-input">
+                    <span>Final Sınav Notu <small style="opacity: 0.7;">(Belli değilse boş bırakınız)</small></span>
+                    <span class="akts-pill">%25</span>
+                </label>
+                <input type="number" id="final-input" class="score-input" min="0" max="100" placeholder="Örn: 65">
+            </div>
+
+            <!-- Butonlar -->
+            <div class="action-buttons" style="margin-top: 20px;">
+                <button type="button" class="btn-primary" onclick="hesapla()">
+                    <i class="fa-solid fa-bolt"></i> Durumu Hesapla
+                </button>
+                <button type="button" class="btn-secondary" onclick="sifirla()">
+                    <i class="fa-solid fa-rotate-right"></i> Temizle
                 </button>
             </div>
+        </section>
 
-            <div class="komite-list">
-                <!-- 1. Kurul (Sabit 100) -->
-                <div class="komite-row fixed-row">
-                    <div class="row-info">
-                        <span class="komite-badge">1. Blok</span>
-                        <span class="komite-name">Uyum Haftası</span>
-                        <span class="akts-pill">1 AKTS</span>
-                    </div>
-                    <div class="row-input-wrap">
-                        <input type="number" id="k1" value="100" readonly class="input-fixed">
-                        <span class="fixed-tag"><i class="fa-solid fa-lock"></i> Sabit</span>
-                    </div>
-                </div>
-
-                <!-- 2. Kurul -->
-                <div class="komite-row">
-                    <div class="row-info">
-                        <span class="komite-badge">2. Blok</span>
-                        <span class="komite-name">Hayatın Temeli</span>
-                        <span class="akts-pill">4 AKTS</span>
-                    </div>
-                    <div class="row-input-wrap">
-                        <input type="number" id="k2" class="score-input" placeholder="Not" min="0" max="100">
-                    </div>
-                </div>
-
-                <!-- 3. Kurul -->
-                <div class="komite-row">
-                    <div class="row-info">
-                        <span class="komite-badge">3. Blok</span>
-                        <span class="komite-name">Yaşam</span>
-                        <span class="akts-pill">5 AKTS</span>
-                    </div>
-                    <div class="row-input-wrap">
-                        <input type="number" id="k3" class="score-input" placeholder="Not" min="0" max="100">
-                    </div>
-                </div>
-
-                <!-- 4. Kurul -->
-                <div class="komite-row">
-                    <div class="row-info">
-                        <span class="komite-badge">4. Blok</span>
-                        <span class="komite-name">Seçmeli Kurul</span>
-                        <span class="akts-pill">4 AKTS</span>
-                    </div>
-                    <div class="row-input-wrap">
-                        <input type="number" id="k4" class="score-input" placeholder="Not" min="0" max="100">
-                    </div>
-                </div>
-
-                <!-- 5. Kurul -->
-                <div class="komite-row">
-                    <div class="row-info">
-                        <span class="komite-badge">5. Blok</span>
-                        <span class="komite-name">Beslenme</span>
-                        <span class="akts-pill">5 AKTS</span>
-                    </div>
-                    <div class="row-input-wrap">
-                        <input type="number" id="k5" class="score-input" placeholder="Not" min="0" max="100">
-                    </div>
-                </div>
-
-                <!-- 6. Kurul -->
-                <div class="komite-row">
-                    <div class="row-info">
-                        <span class="komite-badge">6. Blok</span>
-                        <span class="komite-name">Enerji</span>
-                        <span class="akts-pill">5 AKTS</span>
-                    </div>
-                    <div class="row-input-wrap">
-                        <input type="number" id="k6" class="score-input" placeholder="Not" min="0" max="100">
-                    </div>
-                </div>
-
-                <!-- 7. Kurul -->
-                <div class="komite-row">
-                    <div class="row-info">
-                        <span class="komite-badge">7. Blok</span>
-                        <span class="komite-name">Mikroçevrede Denge</span>
-                        <span class="akts-pill">5 AKTS</span>
-                    </div>
-                    <div class="row-input-wrap">
-                        <input type="number" id="k7" class="score-input" placeholder="Not" min="0" max="100">
-                    </div>
-                </div>
-
-                <!-- 8. Kurul -->
-                <div class="komite-row">
-                    <div class="row-info">
-                        <span class="komite-badge">8. Blok</span>
-                        <span class="komite-name">Üreme</span>
-                        <span class="akts-pill">5 AKTS</span>
-                    </div>
-                    <div class="row-input-wrap">
-                        <input type="number" id="k8" class="score-input" placeholder="Not" min="0" max="100">
-                    </div>
-                </div>
-
-                <!-- 9. Kurul -->
-                <div class="komite-row">
-                    <div class="row-info">
-                        <span class="komite-badge">9. Blok</span>
-                        <span class="komite-name">Destek ve Hareket</span>
-                        <span class="akts-pill high-akts">9 AKTS</span>
-                    </div>
-                    <div class="row-input-wrap">
-                        <input type="number" id="k9" class="score-input" placeholder="Not" min="0" max="100">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Uygulama ve Diğer Notlar -->
-        <div class="card-section">
-            <div class="section-title-wrap">
-                <div>
-                    <h2><i class="fa-solid fa-stethoscope"></i> Klinik & Uygulama Değerlendirmeleri</h2>
-                    <p class="section-desc">Yıl sonu ortalamasına %10'ar etki eder.</p>
-                </div>
-            </div>
-
-<div class="grid-two">
-    <div class="sub-input-card">
-        <label for="mdu">
-            <span>Mesleki Beceri (MDÜ)</span>
-            <span class="akts-pill">%10</span>
-        </label>
-        <input type="number" id="mdu" class="score-input" value="100" min="0" max="100" placeholder="100">
-    </div>
-
-    <div class="sub-input-card">
-        <label for="pdo">
-            <span>Probleme Dayalı Öğr. (PDÖ)</span>
-            <span class="akts-pill">%10</span>
-        </label>
-        <input type="number" id="pdo" class="score-input" value="100" min="0" max="100" placeholder="100">
-    </div>
-</div>
-
-<div class="sub-input-card" style="margin-top: 12px;" id="final-input-container">
-    <label for="final-input">
-        <span>Final Sınav Notu <small style="opacity: 0.7;">(Belli değilse boş bırakın)</small></span>
-        <span class="akts-pill">%25</span>
-    </label>
-    <input type="number" id="final-input" class="score-input" min="0" max="100" placeholder="Örn: 65">
-</div>
-
-        <div class="action-btn-row">
-            <button id="calc-btn" class="main-cta-btn">
-                <i class="fa-solid fa-bolt"></i> Durumu Hesapla
-            </button>
-        </div>
-
-        <div id="result-dashboard" class="result-dashboard hidden">
+        <!-- 3. Bölüm: Dinamik Sonuç Alanı (Varsayılan gizli) -->
+        <section id="result-area" class="glass-section result-section hidden" style="margin-top: 20px;">
             <div id="status-banner" class="status-banner">
-                <div class="status-icon"><i id="status-icon-i" class="fa-solid fa-circle-check"></i></div>
-                <div>
-                    <h3 id="status-title">Durum Analizi</h3>
-                    <p id="status-desc">Detaylar aşağıda listelenmiştir.</p>
-                </div>
+                <!-- script.js tarafından dinamik doldurulur -->
             </div>
 
-            <div class="metrics-grid">
+            <div class="results-grid">
                 <div class="metric-card">
-                    <div class="metric-head">
-                        <span>Ağırlıklı Blok Ort.</span>
-                        <i class="fa-solid fa-chart-pie"></i>
-                    </div>
-                    <div class="metric-value" id="val-kurul-ort">0.00</div>
-                    <div class="metric-footer">
-                        <span>Etki: <strong>%50</strong></span>
-                        <span id="sub-kurul-status" class="pill-state">Hesaplandı</span>
-                    </div>
+                    <span class="metric-label">Blok Ortalaması</span>
+                    <span id="res-blok-ort" class="metric-value">--</span>
+                    <span class="metric-sub">Ağırlıklı Kurul Notu</span>
                 </div>
 
                 <div class="metric-card">
-                    <div class="metric-head">
-                        <span>Finalsiz Geçme</span>
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
-                    <div class="metric-value" id="val-muafiyet">--</div>
-                    <div class="metric-footer">
-                        <span>Baraj: <strong>80.0</strong></span>
-                        <span id="muafiyet-diff" class="pill-state">Takip ediliyor</span>
-                    </div>
+                    <span class="metric-label">Final Durumu</span>
+                    <span id="res-gereken-final" class="metric-value">--</span>
+                    <span class="metric-sub">Gereken / Girilen</span>
                 </div>
 
-                <div class="metric-card highlight-card">
-                    <div class="metric-head">
-                        <span>Gereken Final Puanı</span>
-                        <i class="fa-solid fa-bullseye"></i>
-                    </div>
-                    <div class="metric-value text-accent" id="val-final-needed">--</div>
-                    <div class="metric-footer">
-                        <span>Final Taban Barajı: <strong>49.5</strong></span>
-                    </div>
+                <div class="metric-card">
+                    <span class="metric-label">Yıl Sonu Başarı Notu</span>
+                    <span id="res-yil-sonu" class="metric-value">--</span>
+                    <span class="metric-sub">Geçme Barajı: 69.50</span>
                 </div>
             </div>
 
-            <div class="calc-explainer" id="calc-explainer">
+            <div id="res-explainer" class="explainer-card">
+                <!-- script.js tarafından detaylı hesap formülü buraya yazılır -->
             </div>
-        </div>
+        </section>
 
+        <!-- Alt Bilgi (Footer) -->
         <footer class="footer">
             <p><strong>OMÜ Tıp Dönem 1 Portalı</strong> • 2026</p>
-            <p class="disclaimer">Yönergeye göre; Blok %50, Final %25, MDU %10, PDÖ %10 ağırlıklı toplanıp (100/95) ile ölçeklenir.</p>
+            <p class="disclaimer">Yönergeye göre: Blok %50, Final %25, MDÜ %10, PDÖ %10 ağırlık toplanıp (100/95) ile ölçeklenir.</p>
             <p class="disclaimer">Resmi kurum sayfası değildir, öğrenci inisiyatifidir.</p>
         </footer>
     </div>
 
+    <!-- Hesaplama Motoru -->
     <script src="script.js"></script>
 </body>
 </html>
