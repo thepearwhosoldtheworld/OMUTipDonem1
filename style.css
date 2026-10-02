@@ -1,25 +1,23 @@
 /* ==========================================================
-   OMÜ TIP DÖNEM 1 - APPLE FROSTED GLASS TASARIM SİSTEMİ
+   OMÜ TIP DÖNEM 1 - APPLE MONOCHROME GLASS TASARIM SİSTEMİ
    ========================================================== */
 
 :root {
-    --bg-dark: #0b0c0e;
+    --bg-dark: #0a0a0c;
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.70);
     --text-muted: rgba(255, 255, 255, 0.45);
     
-    /* Vurgu Renkleri */
-    --apple-blue: #2997ff;
-    --apple-green: #30d158;
-    --apple-amber: #ffd60a;
-    --apple-red: #ff453a;
-    --apple-purple: #af52de;
+    /* Monokrom / Gri Palet (Renkliler Kaldırıldı) */
+    --accent-gray: rgba(255, 255, 255, 0.85);
+    --pill-gray-bg: rgba(255, 255, 255, 0.08);
+    --pill-gray-border: rgba(255, 255, 255, 0.16);
 
     /* Cam Yüzeyler */
-    --card-bg: rgba(22, 22, 26, 0.68);
-    --card-bg-hover: rgba(32, 32, 38, 0.82);
+    --card-bg: rgba(26, 26, 30, 0.65);
+    --card-bg-hover: rgba(38, 38, 44, 0.78);
     --card-border: rgba(255, 255, 255, 0.12);
-    --card-border-hover: rgba(255, 255, 255, 0.28);
+    --card-border-hover: rgba(255, 255, 255, 0.25);
 }
 
 * {
@@ -42,7 +40,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Kampüs Arka Planı ve Koyu Buzlu Katman */
+/* Kampüs Arka Plan Görseli */
 .background-overlay, body::before {
     content: '';
     position: fixed;
@@ -57,6 +55,7 @@ body {
     z-index: -2;
 }
 
+/* Arkadaki fotoğrafı kapatmayan, tatlı bir koyuluk ve buğu katan katman */
 body::after {
     content: '';
     position: fixed;
@@ -64,9 +63,9 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(10, 10, 14, 0.78);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: rgba(10, 10, 12, 0.45); /* Fotoğraf net görünsün diye hafifletildi */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: -1;
 }
 
@@ -147,6 +146,7 @@ body::after {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
+/* İkon kutusu ve ikonlar: Renkli yerine şık gri/gümüş */
 .card-icon {
     width: 42px;
     height: 42px;
@@ -157,13 +157,13 @@ body::after {
     justify-content: center;
     font-size: 18px;
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    color: var(--accent-gray) !important;
 }
 
-.icon-calculator { color: var(--apple-blue); }
-.icon-archive { color: var(--apple-amber); }
-.icon-feedback { color: var(--apple-green); }
-.icon-redirect { color: var(--apple-purple); }
+.icon-calculator, .icon-archive, .icon-feedback, .icon-redirect {
+    color: var(--accent-gray) !important;
+}
 
 .card-content {
     flex: 1;
@@ -189,11 +189,12 @@ body::after {
     line-height: 1.4;
 }
 
+/* Üst Dönemler Hapı: Mor yerine Apple gri rozet */
 .external-pill {
     font-size: 10px;
-    background: rgba(175, 82, 222, 0.2);
-    border: 1px solid rgba(175, 82, 222, 0.4);
-    color: #d896ff;
+    background: var(--pill-gray-bg);
+    border: 1px solid var(--pill-gray-border);
+    color: var(--text-secondary);
     padding: 2px 7px;
     border-radius: 980px;
     font-weight: 600;
@@ -223,11 +224,16 @@ body::after {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--apple-blue);
+    color: var(--text-secondary);
     text-decoration: none;
     font-size: 13px;
     font-weight: 500;
     margin-bottom: 12px;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #ffffff;
 }
 
 .page-title {
@@ -272,6 +278,7 @@ body::after {
 .rule-chip .val {
     font-size: 12px;
     font-weight: 700;
+    color: #ffffff;
 }
 
 .glass-section {
@@ -365,9 +372,9 @@ body::after {
 }
 
 .score-input:focus {
-    border-color: var(--apple-blue);
+    border-color: rgba(255, 255, 255, 0.4);
     background: rgba(0, 0, 0, 0.7);
-    box-shadow: 0 0 0 3px rgba(41, 151, 255, 0.25);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
 }
 
 .score-input::-webkit-outer-spin-button,
@@ -430,7 +437,7 @@ body::after {
 }
 
 .btn-primary:hover {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.88);
 }
 
 .btn-secondary {
@@ -456,8 +463,8 @@ body::after {
     gap: 12px;
 }
 
-.banner-success { background: rgba(48, 209, 88, 0.12); border: 1px solid rgba(48, 209, 88, 0.3); }
-.banner-info { background: rgba(41, 151, 255, 0.12); border: 1px solid rgba(41, 151, 255, 0.3); }
+.banner-success { background: rgba(255, 255, 255, 0.10); border: 1px solid rgba(255, 255, 255, 0.25); }
+.banner-info { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.18); }
 .banner-danger { background: rgba(255, 69, 58, 0.12); border: 1px solid rgba(255, 69, 58, 0.3); }
 
 .results-grid {
@@ -489,13 +496,12 @@ body::after {
     line-height: 1.6;
 }
 
-.text-green { color: var(--apple-green) !important; }
-.text-blue { color: var(--apple-blue) !important; }
-.text-amber { color: var(--apple-amber) !important; }
-.text-red { color: var(--apple-red) !important; }
+/* Gri / Gümüş / Saf Vurgular */
+.text-green, .text-blue, .text-amber { color: #ffffff !important; }
+.text-red { color: #ff6961 !important; }
 
 /* ==========================================================
-   FOOTER (TÜM BEYAZ YAZILAR)
+   FOOTER
    ========================================================== */
 
 .footer {
@@ -513,29 +519,11 @@ body::after {
     margin-top: 3px;
 }
 
-/* ==========================================================
-   MOBİL UYUM (RESPONSIVE)
-   ========================================================== */
-
+/* Mobil */
 @media (max-width: 580px) {
-    body {
-        padding: 24px 12px 40px 12px;
-    }
-
-    .rules-bar {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .grid-two {
-        grid-template-columns: 1fr;
-    }
-
-    .results-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .score-input {
-        width: 70px;
-        min-width: 70px;
-    }
+    body { padding: 24px 12px 40px 12px; }
+    .rules-bar { grid-template-columns: repeat(2, 1fr); }
+    .grid-two { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr; }
+    .score-input { width: 70px; min-width: 70px; }
 }
