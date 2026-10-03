@@ -1,31 +1,25 @@
-const CACHE_NAME = 'piriformis-v4';
+const CACHE_NAME = 'piriformis-v5';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/hesaplayici.html',
-  '/kaynaklar.html',
-  '/iletisim.html',
-  '/style.css',
-  '/script.js',
-  '/manifest.json',
-  '/favicon.ico',
-  '/logo.png',
-  '/arka-plan.jpg'
+  './',
+  './index.html',
+  './hesaplayici.html',
+  './kaynaklar.html',
+  './iletisim.html',
+  './style.css',
+  './script.js',
+  './manifest.json',
+  './favicon.ico',
+  './logo.png',
+  './arka-plan.jpg'
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then(async (cache) => {
-      for (const asset of ASSETS_TO_CACHE) {
-        try {
-          await cache.add(asset);
-        } catch (err) {
-          console.warn('Önbelleğe eklenemedi:', asset);
-        }
-      }
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(ASSETS_TO_CACHE).catch((err) => console.log('Cache hatası:', err));
     })
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
@@ -38,15 +32,16 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request);
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    }).catch(() => {
+      return caches.match('./index.html');
     })
   );
 });
