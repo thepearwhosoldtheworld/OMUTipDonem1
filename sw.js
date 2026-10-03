@@ -1,4 +1,4 @@
-const CACHE_NAME = 'piriformis-v3';
+const CACHE_NAME = 'piriformis-v4';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -15,8 +15,14 @@ const ASSETS_TO_CACHE = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+    caches.open(CACHE_NAME).then(async (cache) => {
+      for (const asset of ASSETS_TO_CACHE) {
+        try {
+          await cache.add(asset);
+        } catch (err) {
+          console.warn('Önbelleğe eklenemedi:', asset);
+        }
+      }
     })
   );
   self.skipWaiting();
