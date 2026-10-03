@@ -6,7 +6,7 @@ const ASSETS_TO_CACHE = [
   '/style.css',
   '/script.js',
   '/manifest.json',
-  '/logo.png',
+  '/favicon.ico',
   '/arka-plan.jpg'
 ];
 
